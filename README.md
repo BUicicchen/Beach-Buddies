@@ -14,14 +14,14 @@ My plan for this project:
 # Running the code:
 
 ## Installation
-In client/ run:
+In freelance-beach-cleanup/ run:
 ```bash
 npm install
 ```
 
 ## Getting Started
 
-Run the development server in client/:
+Run the development server in freelance-beach-cleanup/:
 
 ```bash
 npm run dev
