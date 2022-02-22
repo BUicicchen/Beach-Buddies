@@ -29,4 +29,12 @@ npm run start
 yarn start
 ```
 
+## Viewing the web page
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Deploy
+
+```bash
+npm ci && npm run build
+```
