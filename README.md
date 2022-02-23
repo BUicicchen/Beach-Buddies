@@ -35,8 +35,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deploy
 
-```bash
-npm ci && npm run build
-```
-
-Then merge your code in branch "prod"
+Merge your code into branch "main" and create a pull request or merge into branch "prod".
