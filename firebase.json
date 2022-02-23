@@ -4,7 +4,7 @@
         "indexes": "firestore.indexes.json"
     },
     "hosting": {
-        "public": "build/spark-project",
+        "public": "build/",
         "ignore": [
             "firebase.json",
             "**/.*",
