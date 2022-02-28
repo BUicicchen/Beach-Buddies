@@ -1,16 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Map from './map';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Freelance Beach Cleanup!
-        </p>
-      </header>
+        <Map style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}}></Map>
+<h1>hello</h1>
     </div>
   );
 }
