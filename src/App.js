@@ -5,12 +5,9 @@ import Map from './map';
 function App() {
   return (
     <div className="App">
-        <Map style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}}></Map>
-<h1>hello</h1>
+        <div style={{alignItems: 'center'}}>
+          <Map></Map>
+        </div>
     </div>
   );
 }
