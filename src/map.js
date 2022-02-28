@@ -5,8 +5,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXN0aWFudG1hcmsiLCJhIjoiY2wwNXQ4aDM0MGNyd
 function Map() {
   const mapContainer = useRef(null);
 const map = useRef(null);
-// const [lng, setLng] = useState(-70.9);
-// const [lat, setLat] = useState(42.35);
+const [lng, setLng] = useState(-70.9);
+const [lat, setLat] = useState(42.35);
 const [zoom] = useState(9);
 
 useEffect(() => {
