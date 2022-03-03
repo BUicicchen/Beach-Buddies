@@ -58,14 +58,14 @@ export default function MapComponent() {
     return newDate
   }
 
-  if (loading || beaches.toString() == "[]") {
+  if (loading || beaches.toString() === "[]") {
     return "Loading..."
   }
 
   console.log(beaches)
 
   return (
-    currentPage == 'map' ?
+    currentPage === 'map' ?
       <div>
         <Map
           initialViewState={{
@@ -103,7 +103,7 @@ export default function MapComponent() {
           )}
         </Map>
       </div>
-  : currentPage == 'timer' ?
+  : currentPage === 'timer' ?
   <div>
     <h1>{selectedBeach.name}</h1>
     <img style={{marginBottom: 15}} width="70%" src={selectedBeach.photoURL} />
