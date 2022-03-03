@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import MapComponent from './map/map';
+import MapComponent from './map/map.js';
 
 function App() {
   return (
