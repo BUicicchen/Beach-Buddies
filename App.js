@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Platform, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
-//mapbox api
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
-
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -42,15 +39,6 @@ export default function App() {
     </View>
   );
 }
-
-var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
-
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXN0aWFudG1hcmsiLCJhIjoiY2t6eWx4Z295MDFrczNpbTkxc3N0dGtlaiJ9.SZjeDoboYp2Dvp0UQVeHZg';
-var map = new mapboxgl.Map({
-  container: 'App.js',
-  style: 'mapbox://styles/mapbox/streets-v11'
-});
-
 
 
 const styles = StyleSheet.create({
