@@ -58,6 +58,7 @@
         ]
     },
     "devDependencies": {
-        "firebase-server": "^1.1.0"
+        "firebase-server": "^1.1.0",
+        "worker-loader": "^3.0.8"
     }
 }
