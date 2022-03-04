@@ -2,7 +2,6 @@
     "name": "freelance-beach-cleanup",
     "version": "0.1.0",
     "private": true,
-    "proxy": "https://freelance-beach-cleanup.web.app/",
     "dependencies": {
         "@emotion/react": "^11.8.1",
         "@emotion/styled": "^11.8.1",
@@ -54,5 +53,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "firebase-server": "^1.1.0"
     }
 }
