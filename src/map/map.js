@@ -38,7 +38,14 @@ export default function MapComponent() {
     }
     getBeaches();
 	}, []);
+  console.log(beaches)
 
+  var weekAgo = new Date();
+  var monthAgo = new Date();
+  weekAgo.setDate(weekAgo.getDate()-7);
+  monthAgo.setMonth(monthAgo.getMonth()-1);
+  console.log(weekAgo.getTime()/1000);
+  console.log(monthAgo.getTime()/1000);
   const pins = useMemo(
     () => 
       beaches.map((beach, index) => (
@@ -47,8 +54,19 @@ export default function MapComponent() {
             longitude={beach.coordinate._long}
             latitude={beach.coordinate._lat}
             anchor="bottom"
+            color='#3FB1CE'
         >
-            <Pin onClick={() => setPopupInfo(beach)} />
+            {beach.lastCleaned > weekAgo &&
+              <Pin size='40' color='green' onClick={() => setPopupInfo(beach)} />
+            }
+            {beach.lastCleaned < weekAgo &&
+              <Pin size='40' color='yellow' onClick={() => setPopupInfo(beach)} />
+            }
+            {beach.lastCleaned < monthAgo &&
+              <Pin size='40' color='red' onClick={() => setPopupInfo(beach)} />
+            }
+            
+            
         </Marker>
     )), [beaches]
   );
