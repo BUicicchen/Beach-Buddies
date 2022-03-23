@@ -126,7 +126,7 @@ export default function MapComponent() {
             >
               <div>
                 <h2> {popupInfo.name} </h2>
-                <Button component={Link} to="/beach" state={popupInfo} style={{marginBottom: 15}} variant="outlined" >Start!</Button>
+                <Button component={Link} to="/beach" state={popupInfo} style={{marginBottom: 15}} variant="outlined" >Enter!</Button>
                 <div style={{textAlign: 'left', paddingBottom: 10}}> <b>Last cleaned:</b> {convertTime(popupInfo.lastCleaned.seconds).toString().substring(0,15)} </div>
                 <div style={{textAlign: 'left', paddingBottom: 10}}> <b>Marine Life:</b> { popupInfo.marineLife } </div>
               </div>
