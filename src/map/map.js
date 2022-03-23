@@ -11,6 +11,7 @@ import Map, {
 import Pin from './pin.js';
 import firebase from '../firebase/firebase';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 const TOKEN = 'pk.eyJ1IjoiY2hyaXN0aWFudG1hcmsiLCJhIjoiY2wwNXQ4aDM0MGNydzNpcWo4dWY5MGJkeSJ9.YTP08GGbccsCzCripTYICw'; // Set your mapbox token here
 
@@ -18,7 +19,7 @@ export default function MapComponent() {
   const [popupInfo, setPopupInfo] = useState(null);
   const [beaches, setBeaches] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState('map');
+  const [userLocation, setUserLocation] = useState({});
 
   // for timer page
   const [selectedBeach, setSelectedBeach] = useState('');
@@ -40,33 +41,31 @@ export default function MapComponent() {
 	}, []);
   console.log(beaches)
 
-  var weekAgo = new Date();
-  var monthAgo = new Date();
-  weekAgo.setDate(weekAgo.getDate()-7);
-  monthAgo.setMonth(monthAgo.getMonth()-1);
-  console.log(weekAgo.getTime()/1000);
-  console.log(monthAgo.getTime()/1000);
+  var today = new Date();
+  var weekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate()-7);
+  var monthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+  weekAgo = weekAgo.getTime() / 1000
+  monthAgo = monthAgo.getTime() / 1000
+
   const pins = useMemo(
     () => 
       beaches.map((beach, index) => (
         <Marker
             key={`marker-${index}`}
-            longitude={beach.coordinate._long}
-            latitude={beach.coordinate._lat}
+            longitude={beach.coordinate.longitude}
+            latitude={beach.coordinate.latitude}
             anchor="bottom"
             color='#3FB1CE'
         >
-            {beach.lastCleaned > weekAgo &&
-              <Pin size='40' color='green' onClick={() => setPopupInfo(beach)} />
+            {beach.lastCleaned.seconds > weekAgo &&
+              <Pin size='60' color='green' onClick={() => setPopupInfo(beach)} />
             }
-            {beach.lastCleaned < weekAgo &&
-              <Pin size='40' color='yellow' onClick={() => setPopupInfo(beach)} />
+            {(beach.lastCleaned.seconds <= weekAgo && beach.lastCleaned.seconds > monthAgo) &&
+              <Pin size='60' color='yellow' onClick={() => setPopupInfo(beach)} />
             }
-            {beach.lastCleaned < monthAgo &&
-              <Pin size='40' color='red' onClick={() => setPopupInfo(beach)} />
+            {beach.lastCleaned.seconds <= monthAgo &&
+              <Pin size='60' color='red' onClick={() => setPopupInfo(beach)} />
             }
-            
-            
         </Marker>
     )), [beaches]
   );
@@ -76,14 +75,15 @@ export default function MapComponent() {
     return newDate
   }
 
+
   if (loading || beaches.toString() === "[]") {
     return "Loading..."
   }
 
   console.log(beaches)
 
+  console.log(userLocation)
   return (
-    currentPage === 'map' ?
       <div>
         <Map
           initialViewState={{
@@ -95,7 +95,21 @@ export default function MapComponent() {
           mapboxAccessToken={TOKEN}
           style={{height: '100vh'}}
         >
-          <GeolocateControl position="top-left" />
+          {/* Display user's current locatiom */}
+          <GeolocateControl
+            position="top-left"
+            positionOptions={{ enableHighAccuracy: true }}
+            showUserLocation={true}
+            onGeolocate={(PositionOptions) => {
+              console.log("PositionOptions")
+              console.log(PositionOptions)
+              setUserLocation({
+                ...userLocation,
+                latitude: PositionOptions["coords"].latitude,
+                longitude: PositionOptions["coords"].longitude,
+              });
+            }}
+          />
           <FullscreenControl position="top-left" />
           <NavigationControl position="top-left" />
           <ScaleControl />
@@ -112,7 +126,7 @@ export default function MapComponent() {
             >
               <div>
                 <h2> {popupInfo.name} </h2>
-                <Button style={{marginBottom: 15}} variant="outlined" onClick={() => {setCurrentPage('timer'); setSelectedBeach(popupInfo)}}>Start!</Button>
+                <Button component={Link} to="/beach" state={popupInfo} style={{marginBottom: 15}} variant="outlined" >Enter!</Button>
                 <div style={{textAlign: 'left', paddingBottom: 10}}> <b>Last cleaned:</b> {convertTime(popupInfo.lastCleaned.seconds).toString().substring(0,15)} </div>
                 <div style={{textAlign: 'left', paddingBottom: 10}}> <b>Marine Life:</b> { popupInfo.marineLife } </div>
               </div>
@@ -120,13 +134,7 @@ export default function MapComponent() {
             </Popup>
           )}
         </Map>
+        
       </div>
-  : currentPage === 'timer' ?
-  <div>
-    <h1>{selectedBeach.name}</h1>
-    <img style={{marginBottom: 15}} width="70%" src={selectedBeach.photoURL} />
-    <div><Button style={{marginBottom: 15}} variant="outlined" onClick={() => {setCurrentPage('map')}}>Back</Button></div>
-  </div>
-  : <div></div>
   );
 }
