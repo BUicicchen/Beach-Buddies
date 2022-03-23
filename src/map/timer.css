@@ -1,5 +1,5 @@
 body {
-    background:#2C3E50;
+    background:white;
   }
   
   * {
@@ -48,7 +48,7 @@ body {
     font-size: 16px;
     text-transform: uppercase;
     width: 150px;
-    transition: background 1s;
+    /* transition: background 1s; */
     cursor: pointer;
   }
   .stopwatch .stopwatch-btn-red{
