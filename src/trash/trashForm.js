@@ -33,7 +33,7 @@ export default function TrashForm() {
 
     const [trashList, setTrashList] = useState([
         {"id":"can", "name": "Can", "count": 0},
-        {"id":"cigarette",  "name": "Cigarette", "count": 0},
+        {"id":"cigarette", "name": "Cigarette", "count": 0},
     ])
     function removeItem(item) {
         item.count-=1
