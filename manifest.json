@@ -1,14 +1,7 @@
 {
+    "name": "Clean Beach",
     "short_name": "CleanBeach",
-    "name": "CleanBeach",
-    "icons": [
-    {
-    "src":"/assets/icon.png",
-    "sizes": "192x192",
-    "type": "image/png"
-    }
-    ],
-    "start_url": "/?utm_source=homescreen",
+    "start_url": "/index.html",
     "background_color": "#e05a47",
     "theme_color": "#e05a47",
     "display": "standalone"
