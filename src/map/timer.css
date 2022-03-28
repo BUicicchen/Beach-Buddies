@@ -29,8 +29,8 @@ body {
     text-align: center;
   }
   .stopwatch span{
-    background:#00ABA9;
-    color: #fff;
+    /* background:#00ABA9; */
+    color: black;
     display: inline-block;
     font-family: monospace;
     font-size: 22px;
