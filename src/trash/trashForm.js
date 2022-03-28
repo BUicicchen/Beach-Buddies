@@ -54,10 +54,12 @@ export default function TrashForm() {
     ])
     const [totalCount, setTotalCount] = useState(0)
     function removeItem(item) {
-        item.count-=1
-        setTrashList([...trashList]);
-        let total = totalCount - 1
-        setTotalCount(total)
+        if (item.count > 0) {
+            item.count-=1
+            setTrashList([...trashList]);
+            let total = totalCount - 1
+            setTotalCount(total)
+        }
     }
     function addItem(item) {
         item.count+=1
@@ -75,12 +77,12 @@ export default function TrashForm() {
             {trashList.map((item, index) => (
                 <Grid item xs={2} sm={4} md={4} key={item.id}>
                     <h4>{item.name}</h4>
-                    <img src={item.img} style={{width:200}} />
+                    <img src={item.img} style={{width:100}} />
                     <div></div>
                     <div style={{textAlign:'center', display:'inline-flex'}}>
-                        <Button variant="outlined" onClick={() => {removeItem(item)}}><RemoveIcon/></Button>
+                        <Button variant="outlined" style={{width:2}} onClick={() => {removeItem(item)}}><RemoveIcon /></Button>
                         <p style={{margin:10}} >{item.count}</p>
-                        <Button variant="outlined" onClick={() => {addItem(item)}}><AddIcon/></Button>
+                        <Button variant="outlined" style={{width:2}} onClick={() => {addItem(item)}}><AddIcon /></Button>
                     </div>
                 </Grid>
             ))}
