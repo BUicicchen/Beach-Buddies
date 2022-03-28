@@ -18,7 +18,6 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="beach" element={<Beach />} />
-        <Route path="form" element={<TrashForm />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

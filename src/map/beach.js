@@ -13,6 +13,7 @@ import firebase from '../firebase/firebase';
 import Button from '@mui/material/Button';
 import { Link, useLocation } from 'react-router-dom';
 import Timer from './timer'
+import TrashForm from '../trash/trashForm'
 
 
 export default function Beach() {
@@ -24,15 +25,19 @@ export default function Beach() {
     <div style={{textAlign:'center'}}>
         <h1>{selectedBeach.name}</h1>
         <div>
-          {
-          status == 'start' ? <Button onClick={()=>{setStatus('timer')}} style={{marginBottom: 15}} variant="outlined" >Start!</Button>
-          : <div><Timer></Timer></div>
-          //replace with timer and end button
-            }
-        
+            {status == 'start' ?
+            <div>
+                <Button onClick={()=>{setStatus('timer')}} style={{marginBottom: 15}} variant="outlined" >Start!</Button>
+                <div></div>
+                <img style={{marginBottom: 15}} width="70%" src={selectedBeach.photoURL} />
+            </div>
+          :
+            <div>
+                <Timer></Timer>
+                <TrashForm></TrashForm>
+            </div>
+        }
         </div>
-        <img style={{marginBottom: 15}} width="70%" src={selectedBeach.photoURL} />
-        {/* <div><Button style={{marginBottom: 15}} variant="outlined" onClick={() => {setCurrentPage('map')}}>Back</Button></div> */}
     </div>
   );
 }
