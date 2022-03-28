@@ -10,6 +10,7 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import Beach from "./map/beach";
+import TrashForm from "./trash/trashForm";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="beach" element={<Beach />} />
+        <Route path="form" element={<TrashForm />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
