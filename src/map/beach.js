@@ -13,6 +13,7 @@ import firebase from '../firebase/firebase';
 import Button from '@mui/material/Button';
 import { Link, useLocation } from 'react-router-dom';
 import Timer from './timer'
+import TrashForm from '../trash/trashForm'
 
 
 export default function Beach() {
