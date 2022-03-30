@@ -1,5 +1,6 @@
 import React from 'react';
 import TrashForm from '../trash/trashForm'
+import Warning from '../map/warning'
 
 function BtnComponent(props) {
   return (
@@ -26,11 +27,15 @@ function BtnComponent(props) {
                   onClick={props.finish}>Finish</button>
         </div> : ""
       }
+      {(props.status === 1 || props.status === 2) ?
+        <Warning></Warning>:""
+      }
 
       {(props.status === 1 || props.status === 2) ?
         <TrashForm></TrashForm>:""
       }
-     
+
+
     </div>
   );
 }
