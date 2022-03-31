@@ -69,7 +69,6 @@ function BtnComponent(props) {
       {(props.status === 1 || props.status === 2) ?
         <TrashForm></TrashForm>:""
       }
-<<<<<<< HEAD
      
 
      <div> 
@@ -95,10 +94,6 @@ function BtnComponent(props) {
           </DialogActions>
         </Dialog>
       </div>
-=======
-
-
->>>>>>> 1f50d31b48d7c3d8b77994faa6fe4734d3c81a3e
     </div>
   );
 }
