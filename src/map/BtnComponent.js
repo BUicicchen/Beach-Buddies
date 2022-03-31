@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Warning from '../map/warning'
 
 function BtnComponent(props) {
     // --- check location ---
@@ -61,10 +62,14 @@ function BtnComponent(props) {
                   onClick={props.finish}>Finish</button>
         </div> : ""
       }
+      {(props.status === 1 || props.status === 2) ?
+        <Warning></Warning>:""
+      }
 
       {(props.status === 1 || props.status === 2) ?
         <TrashForm></TrashForm>:""
       }
+<<<<<<< HEAD
      
 
      <div> 
@@ -90,6 +95,10 @@ function BtnComponent(props) {
           </DialogActions>
         </Dialog>
       </div>
+=======
+
+
+>>>>>>> 1f50d31b48d7c3d8b77994faa6fe4734d3c81a3e
     </div>
   );
 }
