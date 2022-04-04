@@ -7,15 +7,22 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Warning from '../map/warning'
+import firebase from '../firebase/firebase';
 
 function BtnComponent(props) {
     // --- check location ---
-    function getUserLocation() {
+    async function getUserLocation() {
+      console.log(props.beachInfo)
+      const beachData = await firebase.firestore().collection("beaches_MA_array_temp").where('id', '==', props.beachInfo.id).get();
+      const fbeachData = beachData.docs[0].data();
+      console.log("Beach Data", fbeachData.boundry)
       navigator.geolocation.getCurrentPosition((pos) => {
-        const lat_max = 42;
-        const lat_min = 41;
-        const long_max = -71;
-        const long_min = -72;
+        console.log("test")
+        const lat_max = Math.min(fbeachData.boundry)+.01;
+        const lat_min = Math.min(fbeachData.boundry)-.01;
+        const long_max = Math.max(fbeachData.boundry)+.01;
+        const long_min = Math.max(fbeachData.boundry)-.01;
+        console.log(long_min, long_max, lat_min, lat_max);
         if (!(pos.coords.latitude >= lat_min && pos.coords.latitude <= lat_max) && (pos.coords.longitude > long_min && pos.coords.longitude <= long_max)) {
           handleClickOpen()
           document.getElementById("stopBtn").click();

@@ -11,6 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Beach() {
   const location = useLocation();
+  console.log(location)
   const selectedBeach = location.state;
   const [status, setStatus] = useState('start');
 
@@ -98,7 +99,7 @@ export default function Beach() {
               </div>
             </div>
             :
-            <div><Timer></Timer></div>
+            <div><Timer beachInfo={selectedBeach}></Timer></div>
           }
         
         </div>

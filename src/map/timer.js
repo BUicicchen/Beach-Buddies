@@ -3,10 +3,11 @@ import DisplayComponent from './DisplayComponent';
 import BtnComponent from './BtnComponent';
 import './timer.css';
 
-function App() {
+function Timer(props) {
   const [time, setTime] = useState({ms:0, s:0, m:0, h:0});
   const [interv, setInterv] = useState();
   const [status, setStatus] = useState(0);
+  const beachInfo = props.beachInfo;
   // Not started = 0
   // started = 1
   // stopped = 2
@@ -54,11 +55,11 @@ function App() {
      <div className="clock-holder">
         <div className="stopwatch">
               <DisplayComponent time={time}/>
-              <BtnComponent status={status} resume={resume} finish={finish} stop={stop} start={start}/>
+              <BtnComponent status={status} resume={resume} finish={finish} stop={stop} start={start} beachInfo={beachInfo}/>
         </div>
       </div>
     </div>
   );
 }
 
-export default App;
+export default Timer;
