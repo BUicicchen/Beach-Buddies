@@ -18,6 +18,7 @@ import TrashForm from '../trash/trashForm'
 
 export default function Beach() {
   const location = useLocation();
+  console.log(location)
   const selectedBeach = location.state;
   const [status, setStatus] = useState('start');
 
@@ -32,7 +33,7 @@ export default function Beach() {
                 <img style={{marginBottom: 15}} width="70%" src={selectedBeach.photoURL} />
             </div>
             :
-            <div><Timer></Timer></div>
+            <div><Timer beachInfo={selectedBeach}></Timer></div>
           }
         
         </div>
