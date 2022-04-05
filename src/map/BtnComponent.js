@@ -52,8 +52,7 @@ function BtnComponent(props) {
         <div>
           <button className="stopwatch-btn stopwatch-btn-red" id="stopBtn"
                   onClick={props.stop}>Stop</button>
-          <button className="stopwatch-btn stopwatch-btn-yel"
-                  onClick={props.finish}>Finish</button>
+          <Warning></Warning>
         </div> : ""
       }
 
@@ -61,12 +60,8 @@ function BtnComponent(props) {
         <div>
           <button className="stopwatch-btn stopwatch-btn-gre"
                   onClick={props.resume}>Resume</button>
-          <button className="stopwatch-btn stopwatch-btn-yel"
-                  onClick={props.finish}>Finish</button>
+        <Warning></Warning>
         </div> : ""
-      }
-      {(props.status === 1 || props.status === 2) ?
-        <Warning></Warning>:""
       }
 
       {(props.status === 1 || props.status === 2) ?

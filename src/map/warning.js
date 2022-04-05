@@ -5,6 +5,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { NavLink } from "react-router-dom";
+
 
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
@@ -13,18 +15,22 @@ export default function AlertDialog() {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCloseCancel = () => {
     setOpen(false);
   };
 
+  // const handleCloseAgree = () => {
+  //   // return <Redirect to="/" />;
+  // };
+
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <button className="stopwatch-btn stopwatch-btn-warning" variant="outlined" onClick={handleClickOpen}>
         Finish
-      </Button>
+      </button>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseCancel}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -37,10 +43,15 @@ export default function AlertDialog() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
+          <Button onClick={handleCloseCancel}>Cancel</Button>
+          <Button> 
+          <NavLink style={{color: "#1976d2", textDecoration: "none"}} to="/">
+              AGREE
+            </NavLink>
           </Button>
+          {/* <Button onClick={handleCloseAgree} autoFocus>
+            Agree
+          </Button> */}
         </DialogActions>
       </Dialog>
     </div>
