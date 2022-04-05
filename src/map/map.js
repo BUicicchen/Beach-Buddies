@@ -80,9 +80,6 @@ export default function MapComponent() {
     return "Loading..."
   }
 
-  console.log(beaches)
-
-  console.log(userLocation)
   return (
       <div>
         <Map
@@ -101,8 +98,6 @@ export default function MapComponent() {
             positionOptions={{ enableHighAccuracy: true }}
             showUserLocation={true}
             onGeolocate={(PositionOptions) => {
-              console.log("PositionOptions")
-              console.log(PositionOptions)
               setUserLocation({
                 ...userLocation,
                 latitude: PositionOptions["coords"].latitude,

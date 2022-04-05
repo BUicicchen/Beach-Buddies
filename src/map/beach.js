@@ -8,23 +8,25 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import firebase from '../firebase/firebase';
 
 export default function Beach() {
   const location = useLocation();
-  console.log(location)
   const selectedBeach = location.state;
   const [status, setStatus] = useState('start');
 
   // --- check location ---
   let here = false;
   let check = true;
-  function getUserLocation() {
+  async function getUserLocation() {
+    const beachData = await firebase.firestore().collection("beaches_MA_array_temp").where('id', '==', selectedBeach.id).get();
+    const fbeachData = beachData.docs[0].data();
     navigator.geolocation.getCurrentPosition((pos) => {
-      const lat_max = 42;
-      const lat_min = 41;
-      const long_max = -71;
-      const long_min = -72;
-      if (!(pos.coords.latitude >= lat_min && pos.coords.latitude <= lat_max) && (pos.coords.longitude > long_min && pos.coords.longitude <= long_max)) {
+      const lat_max = fbeachData.boundry[0]+.01;
+      const lat_min = fbeachData.boundry[0]-.01;
+      const long_max = fbeachData.boundry[1]+.01;
+      const long_min = fbeachData.boundry[1]-.01;
+      if (!((pos.coords.latitude >= lat_min && pos.coords.latitude <= lat_max) && (pos.coords.longitude >= long_min && pos.coords.longitude <= long_max))) {
         check = false;
         handleClickOpen()
       }
@@ -37,7 +39,6 @@ export default function Beach() {
   var started = false;
   async function checkLocation() {
     started = true;
-    console.log(started, !here)
     if(here === false) {
       window.setTimeout(checkLocation, 1000);
     } else {
