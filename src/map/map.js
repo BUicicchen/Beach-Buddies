@@ -12,6 +12,7 @@ import Pin from './pin.js';
 import firebase from '../firebase/firebase';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import Search from '../search.js';
 
 const TOKEN = 'pk.eyJ1IjoiY2hyaXN0aWFudG1hcmsiLCJhIjoiY2wwNXQ4aDM0MGNydzNpcWo4dWY5MGJkeSJ9.YTP08GGbccsCzCripTYICw'; // Set your mapbox token here
 
