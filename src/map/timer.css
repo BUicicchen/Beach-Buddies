@@ -55,7 +55,7 @@ body {
     border: 2px solid #C85454;
     color: #C85454;
   }
-  .stopwatch .stopwatch-btn-yel{
+  .stopwatch .stopwatch-btn-warning{
     border: 2px solid #FFC900;
     color: #FFC900;
   }
@@ -69,7 +69,7 @@ body {
     border: 2px solid #C85454;
     color: #fff;
   }
-  .stopwatch .stopwatch-btn-yel:hover {
+  .stopwatch .stopwatch-btn-warning:hover {
     background: #FFC900;
     border: 2px solid #FFC900;
     color: #fff;
