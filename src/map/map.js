@@ -21,7 +21,23 @@ export default function MapComponent() {
   const [beaches, setBeaches] = useState([]);
   const [loading, setLoading] = useState(false);
   const [userLocation, setUserLocation] = useState({});
+  const { search } = window.location;
 
+  const filterBeaches = (beaches, query) => {
+      if (!query) {
+          return beaches;
+      }
+
+      return beaches.filter((beach) => {
+          const beachName = beach.name.toLowerCase();
+          return beachName.includes(query.toLowerCase());
+      });
+  };
+
+  const query = new URLSearchParams(search).get('s'); 
+  const [searchQuery, setSearchQuery] = useState(query || '');
+  const filteredBeaches = filterBeaches(beaches, searchQuery);
+  // const [currBeach, setcurrBeach] =  useState({});
   // for timer page
   const [selectedBeach, setSelectedBeach] = useState('');
   
@@ -81,8 +97,16 @@ export default function MapComponent() {
     return "Loading..."
   }
 
+  
   return (
       <div>
+        <Search searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}/>
+          <ul>
+                {filteredBeaches.slice(0, 5).map((beach) => (
+                    <Button component={Link} to="/beach" style={{marginBottom: 15}} variant="outlined" state={beach}>{beach.name}</Button>
+                ))}
+            </ul>
         <Map
           initialViewState={{
               longitude: -70.9,
@@ -93,6 +117,7 @@ export default function MapComponent() {
           mapboxAccessToken={TOKEN}
           style={{height: '100vh'}}
         >
+          
           {/* Display user's current locatiom */}
           <GeolocateControl
             position="top-left"
@@ -130,7 +155,6 @@ export default function MapComponent() {
             </Popup>
           )}
         </Map>
-        
       </div>
   );
 }
