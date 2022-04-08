@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
-import Timer from './timer'
+import Timer from './timer';
+import LoadingPin from './pin_loading'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,6 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import firebase from '../firebase/firebase';
+import "../index.css";
 
 export default function Beach() {
   const location = useLocation();
@@ -16,8 +18,9 @@ export default function Beach() {
   const [status, setStatus] = useState('start');
 
   // --- check location ---
-  let here = false;
-  let check = true;
+  const [here,setHere] = useState(false);
+  const [check,setCheck] = useState(true);
+  const [started,setStarted] = useState(false);
   async function getUserLocation() {
     const beachData = await firebase.firestore().collection("beaches_MA_array_temp").where('id', '==', selectedBeach.id).get();
     const fbeachData = beachData.docs[0].data();
@@ -27,29 +30,25 @@ export default function Beach() {
       const long_max = fbeachData.boundry[1]+.01;
       const long_min = fbeachData.boundry[1]-.01;
       if (!((pos.coords.latitude >= lat_min && pos.coords.latitude <= lat_max) && (pos.coords.longitude >= long_min && pos.coords.longitude <= long_max))) {
-        check = false;
+        setCheck(false);
         handleClickOpen()
+      } else {
+        setHere(false);
+        setCheck(true);
+        setStarted(false);
+        setStatus('timer')
       }
-      here = true;
+      setHere(true);
     });
     if (here) {
+      window.clearTimeout(checkLocation)
       return check;
     }
   }
-  var started = false;
   async function checkLocation() {
-    started = true;
-    if(here === false) {
+    setStarted(true);
+    if(here === false && check == false && started == true) {
       window.setTimeout(checkLocation, 1000);
-    } else {
-      let check = await getUserLocation();
-      if (here) {
-        if (check) {
-          setStatus('timer')
-        } else {
-          handleClickOpen()
-        }
-      }
     }
   }
   const [open, setOpen] = React.useState(false);
@@ -57,6 +56,9 @@ export default function Beach() {
     setOpen(true);
   };
   const handleClose = () => {
+    setHere(false);
+    setCheck(true);
+    setStarted(false);
     setOpen(false);
   };
   
@@ -69,7 +71,11 @@ export default function Beach() {
                 <div> 
                     <Button onClick={()=>{getUserLocation(); checkLocation()}} style={{marginBottom: 15}} variant="outlined" >Start!</Button>
                     {
-                      started ? <h4>Loading...</h4> : <div></div>
+                      started ?
+                        <div className="rotate">
+                          <LoadingPin size='40' color='green'></LoadingPin>
+                        </div>
+                      : <div></div>
                     }
                     <div></div>
                     <img style={{marginBottom: 15}} width="70%" src={selectedBeach.photoURL} />
