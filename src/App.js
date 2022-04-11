@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
 import MapComponent from './map/map.js';
-import mapboxgl from "mapbox-gl"; // This is a dependency of react-map-gl even if you didn't explicitly install it
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
 // eslint-disable-next-line import/no-webpack-loader-syntax
-mapboxgl.workerClass = require("mapbox-gl/dist/mapbox-gl-csp-worker").default;
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker'; // Load worker code separately with worker-loader
+mapboxgl.workerClass = MapboxWorker; // Wire up loaded worker to be used instead of the default
 
 function App() {
   return (
