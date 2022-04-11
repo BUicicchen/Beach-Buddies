@@ -3,7 +3,7 @@ import './App.css';
 import MapComponent from './map/map.js';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
 // eslint-disable-next-line import/no-webpack-loader-syntax
-// mapboxgl.workerClass = require("mapbox-gl/dist/mapbox-gl-csp-worker").default;
+mapboxgl.workerClass = require("mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 function App() {
   return (
