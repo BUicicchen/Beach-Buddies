@@ -162,7 +162,7 @@ export default function MapComponent() {
               closeOnClick={false}
               onClose={() => setPopupInfo(null)}
             >
-              <div style={{backgroundColor:"#355598", borderRadius:20, padding:10}}>
+              <div style={{backgroundColor:"#355598", borderRadius:20, padding:10, maxWidth:180}}>
                   <h2 style={{paddingBottom: 10, color:"#ffffff"}}> {popupInfo.name} </h2>
                   <img width="100%" src={popupInfo.photoURL} padding="10" />
                   <div style={{textAlign: 'left', color:"#ffffff", paddingBottom: 10}}> <b>Last cleaned:</b> {convertTime(popupInfo.lastCleaned.seconds).toString().substring(0,15)} </div>
