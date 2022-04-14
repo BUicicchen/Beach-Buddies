@@ -12,7 +12,11 @@ import Pin from './pin.js';
 import firebase from '../firebase/firebase';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import Search from '../search.js';
+import Search from './search.js';
+import '../map/map.css'
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import BottomNavbar from '../bottomNavbar.js';
 
 const TOKEN = 'pk.eyJ1IjoiY2hyaXN0aWFudG1hcmsiLCJhIjoiY2wwNXQ4aDM0MGNydzNpcWo4dWY5MGJkeSJ9.YTP08GGbccsCzCripTYICw'; // Set your mapbox token here
 
@@ -37,7 +41,6 @@ export default function MapComponent() {
   const query = new URLSearchParams(search).get('s'); 
   const [searchQuery, setSearchQuery] = useState(query || '');
   const filteredBeaches = filterBeaches(beaches, searchQuery);
-  // const [currBeach, setcurrBeach] =  useState({});
   // for timer page
   const [selectedBeach, setSelectedBeach] = useState('');
   
@@ -100,22 +103,36 @@ export default function MapComponent() {
   
   return (
       <div>
-        <Search searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}/>
-          <ul>
-                {filteredBeaches.slice(0, 5).map((beach) => (
-                    <Button component={Link} to="/beach" style={{marginBottom: 15}} variant="outlined" state={beach}>{beach.name}</Button>
-                ))}
-            </ul>
+        <Box sx={{ flexGrow: 1, height: '85px', bgcolor: "#355598" }} position="static" >
+          <Toolbar disableGutters>
+              <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+              {window.innerWidth <= 760 ?
+                <ul>
+                  {filteredBeaches.slice(0, 1).map((beach) => (
+                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} component={Link} to="/beach" variant="filled" state={beach}>
+                        {beach.name}
+                      </Button>
+                  ))}
+                </ul> :
+                <ul>
+                  {filteredBeaches.slice(0, 5).map((beach) => (
+                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} component={Link} to="/beach" variant="filled" state={beach}>
+                        {beach.name}
+                      </Button>
+                  ))}
+                </ul>
+              }
+          </Toolbar>
+        </Box>
         <Map
           initialViewState={{
-              longitude: -70.9,
+              longitude: -71.01,
               latitude: 42.35,
               zoom: 10
           }}
           mapStyle="mapbox://styles/mapbox/streets-v9"
           mapboxAccessToken={TOKEN}
-          style={{height: '100vh'}}
+          style={{height: 'calc(100vh - 85px - 70px)'}}
         >
           
           {/* Display user's current locatiom */}
@@ -145,16 +162,18 @@ export default function MapComponent() {
               closeOnClick={false}
               onClose={() => setPopupInfo(null)}
             >
-              <div>
-                <h2> {popupInfo.name} </h2>
-                <Button component={Link} to="/beach" state={popupInfo} style={{marginBottom: 15}} variant="outlined" >Enter!</Button>
-                <div style={{textAlign: 'left', paddingBottom: 10}}> <b>Last cleaned:</b> {convertTime(popupInfo.lastCleaned.seconds).toString().substring(0,15)} </div>
-                <div style={{textAlign: 'left', paddingBottom: 10}}> <b>Marine Life:</b> { popupInfo.marineLife } </div>
+              <div style={{backgroundColor:"#355598", borderRadius:20, padding:10}}>
+                  <h2 style={{paddingBottom: 10, color:"#ffffff"}}> {popupInfo.name} </h2>
+                  <img width="100%" src={popupInfo.photoURL} padding="10" />
+                  <div style={{textAlign: 'left', color:"#ffffff", paddingBottom: 10}}> <b>Last cleaned:</b> {convertTime(popupInfo.lastCleaned.seconds).toString().substring(0,15)} </div>
+                  <div style={{textAlign: 'left', color:"#ffffff", paddingBottom: 20}}> <b>Marine Life:</b> { popupInfo.marineLife } </div>
+                  <Button component={Link} to="/beach" state={popupInfo} style={{marginBottom: 15, backgroundColor:'#355598', border:"2px white solid",}} variant="contained" >Get Cleaning!</Button>
               </div>
-              <img width="100%" src={popupInfo.photoURL} />
             </Popup>
           )}
         </Map>
+
+        <BottomNavbar></BottomNavbar>
       </div>
   );
 }
