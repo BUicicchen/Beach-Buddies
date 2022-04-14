@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { NavLink } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
@@ -45,9 +45,7 @@ export default function AlertDialog() {
         <DialogActions>
           <Button onClick={handleCloseCancel}>Cancel</Button>
           <Button> 
-          <NavLink style={{color: "#1976d2", textDecoration: "none"}} to="/">
-              AGREE
-            </NavLink>
+          <Button component={Link} to="/congratulations" style={{marginBottom: 15}} variant="outlined" state={"variable"}>AGREE</Button>
           </Button>
           {/* <Button onClick={handleCloseAgree} autoFocus>
             Agree
