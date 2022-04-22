@@ -22,6 +22,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { useTheme } from '@mui/material/styles';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Grid from '@mui/material/Grid';
+import beachBall from '../public/assets/beach-ball_NEW.svg';
 
 const TOKEN = 'pk.eyJ1IjoiY2hyaXN0aWFudG1hcmsiLCJhIjoiY2wwNXQ4aDM0MGNydzNpcWo4dWY5MGJkeSJ9.YTP08GGbccsCzCripTYICw'; // Set your mapbox token here
 
@@ -128,7 +130,7 @@ export default function MapComponent() {
 
   
   return (
-      <div>
+      <div style={{maxHeight:'calc(100vh)'}}>
         {/* first thing that pops up when user first enter the app */}
         <Dialog
           open={openIntroPopup}
@@ -140,7 +142,14 @@ export default function MapComponent() {
           {activeStep === 0 ?
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              <h1 style={{color: '#FFF1CA', marginBottom:10}} >Welcome to Beach Buddy!</h1>
+              <Grid container spacing={2}>
+                <Grid item xs={10}>
+                  <h1 style={{color: '#FFF1CA', marginBottom:10}} >Welcome to Beach Buddy!</h1>
+                </Grid>
+                <Grid item xs={2}>
+                  <img src={beachBall} style={{width:70, marginLeft:-25}} />
+                </Grid>
+              </Grid>
               <p style={{color: '#FFF1CA', marginBottom:30}} >Your favorite beach cleaning tool.</p>
               <h2 style={{color: '#FFF1CA'}} >Are you a new user?</h2>
               <Button onClick={handleNext} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}} >Yes</Button>
@@ -158,9 +167,16 @@ export default function MapComponent() {
               <h1 style={{color: '#FFF1CA', marginBottom:10}} >We can help you with all your beach cleaning needs.</h1>
               <p style={{color: '#FFF1CA', marginBottom:20}} >Help us help you help the environment.</p>
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <Box style={{backgroundColor: '#ABBBDF', width:50, height:50, textAlign:'center'}} borderRadius="50%" > 
-                  <ArrowForwardIcon onClick={handleNext} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
-                </Box>
+                <Grid container spacing={2}>
+                  <Grid item xs={3}>
+                    <img src={beachBall} style={{width:100, transform:`rotate(${20}deg)`}} />
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Box style={{backgroundColor: '#ABBBDF', width:50, height:50, textAlign:'center', marginLeft: 70, marginTop: 40}} borderRadius="50%" > 
+                      <ArrowForwardIcon onClick={handleNext} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
+                    </Box>
+                  </Grid>
+                </Grid>
               </div>
             </DialogContentText>
           </DialogContent>
@@ -170,9 +186,16 @@ export default function MapComponent() {
               <h1 style={{color: '#FFF1CA', marginBottom:10}} >Find a beach to get started!</h1>
               <p style={{color: '#FFF1CA', marginBottom:20}} >You can either search or swipe through the map!</p>
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <Box style={{backgroundColor: '#ABBBDF', width:50, height:50, textAlign:'center'}} borderRadius="50%" > 
-                  <ArrowForwardIcon onClick={handleNext} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
-                </Box>
+                <Grid container spacing={2}>
+                  <Grid item xs={3}>
+                    <img src={beachBall} style={{width:100, transform:`rotate(${-20}deg)`}} />
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Box style={{backgroundColor: '#ABBBDF', width:50, height:50, textAlign:'center', marginLeft: 70, marginTop: 40}} borderRadius="50%" > 
+                      <ArrowForwardIcon onClick={handleNext} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
+                    </Box>
+                  </Grid>
+                </Grid>
               </div>
             </DialogContentText>
           </DialogContent>
@@ -182,9 +205,16 @@ export default function MapComponent() {
               <h1 style={{color: '#FFF1CA', marginBottom:10}} >Allow location access?</h1>
               <p style={{color: '#FFF1CA', marginBottom:20}} >Beach Buddy uses location services to credit cleaning hours, as well as to keep track of what trash is picked up where.</p>
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <Box style={{backgroundColor: '#ABBBDF', width:50, height:50, textAlign:'center'}} borderRadius="50%" > 
-                  <ArrowForwardIcon onClick={turnOnLocation} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
-                </Box>
+                <Grid container spacing={2}>
+                  <Grid item xs={3}>
+                    <img src={beachBall} style={{width:100, transform:`rotate(${20}deg)`}} />
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Box style={{backgroundColor: '#ABBBDF', width:50, height:50, textAlign:'center', marginLeft: 70, marginTop: 40}} borderRadius="50%" > 
+                    <ArrowForwardIcon onClick={turnOnLocation} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
+                    </Box>
+                  </Grid>
+                </Grid>
               </div>
             </DialogContentText>
           </DialogContent>
