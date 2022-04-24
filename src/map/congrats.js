@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import PropTypes from "prop-types";
 // import sizeMe from "react-sizeme";
 import Confetti from "react-confetti";
-import {useState, useEffect} from 'react';
+import {useState, useEffect, TextInput, View, StyleSheet} from 'react';
 
 const styles = {
     fontFamily: "sans-serif",
@@ -13,6 +13,19 @@ const styles = {
     transition: 'white 1s ease-out',
     // opacity: 1,
 };
+// const styling = StyleSheet.create({
+//     input: {
+//       width: 300,
+//       height: 40,
+//       backgroundColor: "#fff",
+//       paddingVertical: 10,
+//       paddingHorizontal: 15,
+//       borderColor: "#ccc",
+//       borderWidth: 1,
+//       borderRadius: 15,
+//       fontSize: 16,
+//     },
+//   });
 
 // const stylesOpen = {
 //   fontFamily: "sans-serif",
@@ -55,42 +68,56 @@ export default function Congratulations() {
       setAnimationDone(!animationDone)
     };
 
-            return (
+    return (
 // {
 //     true ? <div></div>
 //     : <div></div>
 // }
 
     <div>
-
+    <style>{'body { background-color: #FFF1CA; }'}</style>
     {animationDone ? 
-        // <div className={fadeProp.fade}>
-        <div style={styles}>
-            <div
-                style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%"
-                }}
-                >
-                <Confetti
-                    gravity={0.4}
-                    run={animationDone}
-                    numberOfPieces={400}
-                    // {...size}
-                />
-            </div> 
-        </div>
-        :
-        <div>
-            <h1>hello</h1>
-        </div>
+    // <div className={fadeProp.fade}>
+
+    <div style={styles}>
+        <div
+            style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%"
+            }}
+            >
+            <Confetti
+                gravity={0.4}
+                run={animationDone}
+                numberOfPieces={400}
+                // {...size}
+            />
+        </div> 
+    </div>
+    :
+    // <body style="background-color:grey;">
+
+    // </body>
+    <div>
+        <h1>
+            <center>
+            <font color="#35559B">  CONGRATULATIONS! </font>  
+            </center>
+        </h1>
+        {/* <View style={styles.screen}>
+        <TextInput style={styles.input} placeholder="Type something here" />
+        </View> */}
+        <p id="rcorners2">Rounded corners!</p>
+    </div>
     }
     </div>
+    
     )
   };
+
 
 
 
@@ -170,3 +197,4 @@ export default function Congratulations() {
 // );
 
 // export default App
+
