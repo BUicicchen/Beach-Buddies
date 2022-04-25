@@ -143,10 +143,10 @@ export default function MapComponent() {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <Grid container spacing={2}>
-                <Grid item xs={10}>
+                <Grid item xs={9}>
                   <h1 style={{color: '#FFF1CA', marginBottom:10}} >Welcome to Beach Buddy!</h1>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                   <img src={beachBall} style={{width:70, marginLeft:-25}} />
                 </Grid>
               </Grid>
