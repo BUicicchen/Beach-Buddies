@@ -196,22 +196,17 @@ export default function MapComponent() {
                   <img src={beachBall} style={{width:70, marginLeft:-25}} />
                 </Grid>
               </Grid>
-              <p style={{color: '#FFF1CA', marginBottom:30}} >Your favorite beach cleaning tool.</p>
+              <p style={{color: '#FFF1CA', marginBottom:30, fontSize:20}} >Your favorite beach cleaning tool.</p>
               <h2 style={{color: '#FFF1CA'}} >Are you a new user?</h2>
               <Button onClick={handleNext} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}} >Yes</Button>
               <Button onClick={handleCloseIntroPopup} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}} >No</Button>
-              <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <Box style={{backgroundColor: '#ABBBDF', width:50, height:50, textAlign:'center'}} borderRadius="50%" > 
-                  <ArrowForwardIcon onClick={handleNext} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
-                </Box>
-              </div>
             </DialogContentText>
           </DialogContent>
           : activeStep === 1 ?
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <h1 style={{color: '#FFF1CA', marginBottom:10}} >We can help you with all your beach cleaning needs.</h1>
-              <p style={{color: '#FFF1CA', marginBottom:20}} >Help us help you help the environment.</p>
+              <p style={{color: '#FFF1CA', marginBottom:20, fontSize:20}} >Help us help you help the environment.</p>
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <Grid container spacing={2}>
                   <Grid item xs={3}>
@@ -230,7 +225,7 @@ export default function MapComponent() {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <h1 style={{color: '#FFF1CA', marginBottom:10}} >Find a beach to get started!</h1>
-              <p style={{color: '#FFF1CA', marginBottom:20}} >You can either search or swipe through the map!</p>
+              <p style={{color: '#FFF1CA', marginBottom:20, fontSize:20}} >You can either search or swipe through the map!</p>
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <Grid container spacing={2}>
                   <Grid item xs={3}>
@@ -249,7 +244,7 @@ export default function MapComponent() {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <h1 style={{color: '#FFF1CA', marginBottom:10}} >Allow location access?</h1>
-              <p style={{color: '#FFF1CA', marginBottom:20}} >Beach Buddy uses location services to credit cleaning hours, as well as to keep track of what trash is picked up where.</p>
+              <p style={{color: '#FFF1CA', marginBottom:20, fontSize:20}} >Beach Buddy uses location services to credit cleaning hours, as well as to keep track of what trash is picked up where.</p>
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <Grid container spacing={2}>
                   <Grid item xs={3}>
@@ -359,20 +354,22 @@ export default function MapComponent() {
                   onClose={handleClose}
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"
+                  PaperProps={{style:{borderRadius: 20, maxWidth: 400} }}
                 >
-                  <DialogTitle id="alert-dialog-title">
-                    {"Location Alert!"}
-                  </DialogTitle>
                   <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                      You are detected to be out of the beach region, please return to the beach!
-                    </DialogContentText>
+                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                      <h1 style={{color:"#355598", marginBottom:10}}>Whoa there Buddy,</h1>
+                    </div>
+                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                      <p style={{color:"#355598", marginBottom:10, fontSize:20}}>You're not on {beachPopup.name}, wya?</p>
+                    </div>
+                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                      <img style={{width:200, marginBottom:30}} src={require('../public/assets/warning-animation.gif')} />
+                    </div>
+                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                      <Button style={{color:"#355598", textTransform:'none', fontSize:20}} onClick={handleClose}>I'm heading to the beach!</Button>
+                    </div>
                   </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose} autoFocus>
-                      Continue
-                    </Button>
-                  </DialogActions>
                 </Dialog>
               </div>
             </div>
