@@ -8,9 +8,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-export default function AlertDialog() {
+export default function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
-
+  const beach = props.beach;
+  console.log("props 2")
+  console.log("beach", beach)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -45,7 +47,7 @@ export default function AlertDialog() {
         <DialogActions>
           <Button onClick={handleCloseCancel}>Cancel</Button>
           <Button> 
-          <Button component={Link} to="/congratulations" style={{marginBottom: 15}} variant="outlined" state={"variable"}>AGREE</Button>
+          <Button component={Link} to="/congratulations" style={{marginBottom: 15}} variant="outlined" state={beach}>AGREE</Button>
           </Button>
           {/* <Button onClick={handleCloseAgree} autoFocus>
             Agree

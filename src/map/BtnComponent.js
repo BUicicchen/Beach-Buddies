@@ -52,7 +52,7 @@ function BtnComponent(props) {
         <div>
           <button className="stopwatch-btn stopwatch-btn-red" id="stopBtn"
                   onClick={props.stop}>Stop</button>
-          <Warning></Warning>
+          <Warning beach={props.beachInfo}></Warning>
         </div> : ""
       }
 
@@ -60,7 +60,7 @@ function BtnComponent(props) {
         <div>
           <button className="stopwatch-btn stopwatch-btn-gre"
                   onClick={props.resume}>Resume</button>
-        <Warning></Warning>
+        <Warning beach={props.beachInfo}></Warning>
         </div> : ""
       }
 

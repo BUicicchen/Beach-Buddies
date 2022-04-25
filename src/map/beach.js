@@ -11,6 +11,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import firebase from '../firebase/firebase';
 import "../index.css";
+import { blue } from '@mui/material/colors';
 
 export default function Beach() {
   const location = useLocation();
