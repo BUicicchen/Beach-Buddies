@@ -20,16 +20,19 @@ import BottomNavbar from '../bottomNavbar.js';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import { useTheme } from '@mui/material/styles';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Grid from '@mui/material/Grid';
 import beachBall from '../public/assets/beach-ball_NEW.svg';
+import {useNavigate} from 'react-router-dom';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const TOKEN = 'pk.eyJ1IjoiY2hyaXN0aWFudG1hcmsiLCJhIjoiY2wwNXQ4aDM0MGNydzNpcWo4dWY5MGJkeSJ9.YTP08GGbccsCzCripTYICw'; // Set your mapbox token here
 
 export default function MapComponent() {
   const [openIntroPopup, setOpenIntroPopup] = useState(true);
   const handleCloseIntroPopup = () => {
+    turnOnLocation()
     setOpenIntroPopup(false);
   };
   const [beachPopup, setBeachPopup] = useState(null);
@@ -39,7 +42,6 @@ export default function MapComponent() {
   const { search } = window.location;
 
   // first thing that pops up when user first enter the app
-  const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -51,8 +53,6 @@ export default function MapComponent() {
       alert('Please try again to enable location!');
       turnOnLocation();
     }
-    handleCloseIntroPopup()
-    console.log("here")
   };
 
   // display beaches
@@ -66,12 +66,58 @@ export default function MapComponent() {
       });
   };
 
+  // search for beaches
   const query = new URLSearchParams(search).get('s'); 
   const [searchQuery, setSearchQuery] = useState(query || '');
   const filteredBeaches = filterBeaches(beaches, searchQuery);
-  // for timer page
-  const [selectedBeach, setSelectedBeach] = useState('');
-  
+
+  // check location before entering
+  const navigate = useNavigate();
+  const [here,setHere] = useState(false);
+  const [check,setCheck] = useState(true);
+  const [started,setStarted] = useState(false);
+  async function getUserLocation() {
+    const beachData = await firebase.firestore().collection("beaches_MA_array_temp").where('id', '==', beachPopup.id).get();
+    const fbeachData = beachData.docs[0].data();
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const lat_max = fbeachData.boundry[0]+.01;
+      const lat_min = fbeachData.boundry[0]-.01;
+      const long_max = fbeachData.boundry[1]+.01;
+      const long_min = fbeachData.boundry[1]-.01;
+      if (!((pos.coords.latitude >= lat_min && pos.coords.latitude <= lat_max) && (pos.coords.longitude >= long_min && pos.coords.longitude <= long_max))) {
+        setCheck(false);
+        handleClickOpen()
+      } else {
+        navigate('/beach',{state:{ selectedBeach: beachPopup }});
+        setHere(false);
+        setCheck(true);
+        setStarted(false);
+      }
+      setHere(true);
+    });
+    if (here) {
+      window.clearTimeout(checkLocation)
+      return check;
+    }
+  }
+  async function checkLocation() {
+    setStarted(true);
+    if(here === false && check == false && started == true) {
+      window.setTimeout(checkLocation, 1000);
+    }
+  }
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setHere(false);
+    setCheck(true);
+    setStarted(false);
+    setOpen(false);
+  };
+
+
   useEffect(() => {
 		const getBeaches = async () => {
       setLoading(true);
@@ -143,29 +189,24 @@ export default function MapComponent() {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <Grid container spacing={2}>
-                <Grid item xs={10}>
+                <Grid item xs={9}>
                   <h1 style={{color: '#FFF1CA', marginBottom:10}} >Welcome to Beach Buddy!</h1>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                   <img src={beachBall} style={{width:70, marginLeft:-25}} />
                 </Grid>
               </Grid>
-              <p style={{color: '#FFF1CA', marginBottom:30}} >Your favorite beach cleaning tool.</p>
+              <p style={{color: '#FFF1CA', marginBottom:30, fontSize:20}} >Your favorite beach cleaning tool.</p>
               <h2 style={{color: '#FFF1CA'}} >Are you a new user?</h2>
               <Button onClick={handleNext} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}} >Yes</Button>
               <Button onClick={handleCloseIntroPopup} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}} >No</Button>
-              <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <Box style={{backgroundColor: '#ABBBDF', width:50, height:50, textAlign:'center'}} borderRadius="50%" > 
-                  <ArrowForwardIcon onClick={handleNext} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
-                </Box>
-              </div>
             </DialogContentText>
           </DialogContent>
           : activeStep === 1 ?
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <h1 style={{color: '#FFF1CA', marginBottom:10}} >We can help you with all your beach cleaning needs.</h1>
-              <p style={{color: '#FFF1CA', marginBottom:20}} >Help us help you help the environment.</p>
+              <p style={{color: '#FFF1CA', marginBottom:20, fontSize:20}} >Help us help you help the environment.</p>
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <Grid container spacing={2}>
                   <Grid item xs={3}>
@@ -184,7 +225,7 @@ export default function MapComponent() {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <h1 style={{color: '#FFF1CA', marginBottom:10}} >Find a beach to get started!</h1>
-              <p style={{color: '#FFF1CA', marginBottom:20}} >You can either search or swipe through the map!</p>
+              <p style={{color: '#FFF1CA', marginBottom:20, fontSize:20}} >You can either search or swipe through the map!</p>
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <Grid container spacing={2}>
                   <Grid item xs={3}>
@@ -203,7 +244,7 @@ export default function MapComponent() {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <h1 style={{color: '#FFF1CA', marginBottom:10}} >Allow location access?</h1>
-              <p style={{color: '#FFF1CA', marginBottom:20}} >Beach Buddy uses location services to credit cleaning hours, as well as to keep track of what trash is picked up where.</p>
+              <p style={{color: '#FFF1CA', marginBottom:20, fontSize:20}} >Beach Buddy uses location services to credit cleaning hours, as well as to keep track of what trash is picked up where.</p>
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <Grid container spacing={2}>
                   <Grid item xs={3}>
@@ -211,7 +252,7 @@ export default function MapComponent() {
                   </Grid>
                   <Grid item xs={9}>
                     <Box style={{backgroundColor: '#ABBBDF', width:50, height:50, textAlign:'center', marginLeft: 70, marginTop: 40}} borderRadius="50%" > 
-                    <ArrowForwardIcon onClick={turnOnLocation} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
+                    <ArrowForwardIcon onClick={handleCloseIntroPopup} style={{color: '#35559B', textAlign: 'center', marginBottom:10, fontSize:40, paddingTop:10}}></ArrowForwardIcon>
                     </Box>
                   </Grid>
                 </Grid>
@@ -287,7 +328,56 @@ export default function MapComponent() {
                   <img width="100%" src={beachPopup.photoURL} padding="10" />
                   <div style={{textAlign: 'left', color:"#ffffff", paddingBottom: 10}}> <b>Last cleaned:</b> {convertTime(beachPopup.lastCleaned.seconds).toString().substring(0,15)} </div>
                   <div style={{textAlign: 'left', color:"#ffffff", paddingBottom: 20}}> <b>Marine Life:</b> { beachPopup.marineLife } </div>
-                  <Button component={Link} to="/beach" state={beachPopup} style={{marginBottom: 15, backgroundColor:'#355598', border:"2px white solid",}} variant="contained" >Get Cleaning!</Button>
+
+                  
+
+
+
+
+
+              <div>
+                <div> 
+                    <Button onClick={()=>{getUserLocation(); checkLocation()}} style={{marginBottom: 15, backgroundColor:'#355598', border:"2px white solid",}} variant="contained" >Get Cleaning!</Button>
+                    {
+                      started ?
+                        <div className="rotate">
+                          <img src={beachBall} style={{width:60}} />
+                        </div>
+                      : <div></div>
+                    }
+                </div>
+                <div>
+
+                {/* open alert if not in region */}
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                  PaperProps={{style:{borderRadius: 20, maxWidth: 400} }}
+                >
+                  <DialogContent>
+                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                      <h1 style={{color:"#355598", marginBottom:10}}>Whoa there Buddy,</h1>
+                    </div>
+                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                      <p style={{color:"#355598", marginBottom:10, fontSize:20}}>You're not on {beachPopup.name}, wya?</p>
+                    </div>
+                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                      <img style={{width:200, marginBottom:30}} src={require('../public/assets/warning-animation.gif')} />
+                    </div>
+                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                      <Button style={{color:"#355598", textTransform:'none', fontSize:20}} onClick={handleClose}>I'm heading to the beach!</Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </div>
+
+
+
+
+
               </div>
             </Popup>
           )}
