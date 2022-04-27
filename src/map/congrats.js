@@ -4,9 +4,14 @@ import { render } from "react-dom";
 import PropTypes from "prop-types";
 // import sizeMe from "react-sizeme";
 import Confetti from "react-confetti";
+import {useState, useEffect} from 'react';
+//new imports
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import firebase from '../firebase/firebase';
-import { doc, updateDoc } from "firebase/firestore";
-import {useState, useEffect, TextInput, View, StyleSheet} from 'react';
 
 const styles = {
     fontFamily: "sans-serif",
@@ -16,6 +21,14 @@ const styles = {
     transition: 'white 1s ease-out',
     // opacity: 1,
 };
+
+const defaultProps = {
+    bgcolor: "background.paper",
+    borderColor: "text.primary",
+    m: 1,
+    border: 1,
+    style: { width: "5rem", height: "5rem" }
+  };
 // const styling = StyleSheet.create({
 //     input: {
 //       width: 300,
@@ -130,20 +143,44 @@ export default function Congratulations(props) {
 
     // </body>
     <div>
-        <h1>
-            <center>
-            <font color="#35559B">  CONGRATULATIONS! </font>  
-            </center>
-        </h1>
-        {/* <View style={styles.screen}>
-        <TextInput style={styles.input} placeholder="Type something here" />
-        </View> */}
+      <h1 style={{fontFamily: "Poppins", color: "#35559B"}}>
+          <center>
+          <font>  CONGRATULATIONS! </font>  
+          </center>
+      </h1>
+      {/* <Box display="flex" flexDirection="column" alignItems="flex-start">
+        <Box borderRadius="25%" {...defaultProps}></Box>
         <p id="rcorners2">Rounded corners!</p>
+        </Box> */}
     </div>
-    }
+    } 
+    {/* style={{fontFamily: "Poppins", color: "#FFF1CA"}}  */}
+    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}> 
+    <Card sx={{ minWidth: 275 }} style={{borderRadius: 50, width:"80%",minHeight:"80%", backgroundColor: "#ABBBDF"}}>
+      <CardContent>
+        {/* <Typography style={{fontFamily: "Poppins", color: "#FFF1CA"}} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Word of the Day
+        </Typography> */}
+        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA"}} variant="h5" component="div">
+          {/* be{bull}nev{bull}o{bull}lent */}
+        </Typography>
+        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", display: 'flex', justifyContent: 'center', alignItems: 'center'}} sx={{ mb: 1.5 }} color="text.secondary">
+          Clean Up Statistics
+        </Typography>
+        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA"}} variant="body2">
+          Time
+          <br />
+          {'"Amount Cleaned"'}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Email Me Results</Button>
+      </CardActions>
+    </Card>
     </div>
     
-    )
+  </div>
+  )
   };
 
 
