@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from 'react-router-dom';
 import { render } from "react-dom";
 import PropTypes from "prop-types";
 // import sizeMe from "react-sizeme";
@@ -10,6 +11,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import firebase from '../firebase/firebase';
 
 const styles = {
     fontFamily: "sans-serif",
@@ -58,8 +60,15 @@ const defaultProps = {
 //     opacity: 0,
 // };
 
-export default function Congratulations() {
+export default function Congratulations(props) {
     const [animationDone, setAnimationDone] = useState(true)
+    const location = useLocation();
+    const beach = location.state;
+    console.log("props 3")
+    console.log(beach)
+
+
+    // const beach = props.beach;
     // const propTypes = {
     //   size: PropTypes.shape({
     //     width: PropTypes.number,
@@ -72,6 +81,24 @@ export default function Congratulations() {
     })
 
     useEffect(() => {
+        const currTime = new Date()
+        const created = firebase.firestore.Timestamp.fromDate(currTime).toDate();
+
+        updateBeachData();
+        async function updateBeachData(){
+            console.log(created)
+            await firebase.firestore().collection("beaches_MA").doc(beach.doc_id).update({lastCleaned: created});
+            // console.log(beachData)
+            // const fbeachData = beachData.docs[0].data();
+            console.log(beach, currTime)
+            // await updateDoc(beach, {
+            //     last_cleaned: currTime
+            //   });
+            // fbeachData.update({'lastCleaned' : currTime});
+            console.log(beach)
+        }
+       
+        
       setTimeout(() => {
         toggleConfetti();
       }, 3000);
@@ -143,11 +170,11 @@ export default function Congratulations() {
         <Typography style={{fontFamily: "Poppins", color: "#FFF1CA"}} variant="body2">
           Time
           <br />
-          {'"a benevolent smile"'}
+          {'"Amount Cleaned"'}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Email Me Results</Button>
       </CardActions>
     </Card>
     </div>

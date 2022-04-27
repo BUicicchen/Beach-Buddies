@@ -51,10 +51,10 @@ function Timer(props) {
   const resume = () => start();
 
   return (
-    <div className="main-section">
-     <div className="clock-holder">
+    <div className="main-section" >
+     <div className="clock-holder"  style={{background: "#35559B"}}>
         <div className="stopwatch">
-              <DisplayComponent time={time}/>
+              <DisplayComponent time={time} style={{background:"#FFF1CA"}}/>
               <BtnComponent status={status} resume={resume} finish={finish} stop={stop} start={start} beachInfo={beachInfo}/>
         </div>
       </div>

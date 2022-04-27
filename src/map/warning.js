@@ -8,9 +8,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-export default function AlertDialog() {
+export default function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
-
+  const beach = props.beach;
+  console.log("props 2")
+  console.log("beach", beach)
   const handleClickOpen = () => {
     setOpen(true);
   };

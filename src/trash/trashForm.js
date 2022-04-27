@@ -17,16 +17,15 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { experimentalStyled as styled } from '@mui/material/styles';
-import Can from '../public/assets/can.svg';
+import Can from '../public/assets/can_NEW.svg';
 import Cigarette from '../public/assets/smoking.svg';
-import SodaBottle from '../public/assets/bottle-soda-classic.svg';
-import WineBottle from '../public/assets/bottle-wine.svg';
-import FaceMask from '../public/assets/face-mask.svg';
-import ForkDrink from '../public/assets/food-fork-drink.svg';
-import Food from '../public/assets/food.svg';
-import Hook from '../public/assets/hook.svg';
-import Nail from '../public/assets/nail.svg';
-import Needle from '../public/assets/needle.svg';
+import SodaBottle from '../public/assets/plastic-bottle_NEW.svg';
+import WineBottle from '../public/assets/glass-bottle_NEW.svg';
+import FaceMask from '../public/assets/mask_NEW.svg';
+import Food from '../public/assets/food_NEW.svg';
+import Nail from '../public/assets/metal_scrap_NEW.svg';
+import PlasticBag from '../public/assets/plastic-bag_NEW.svg';
+import Needle from '../public/assets/needle_NEW.svg';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -48,8 +47,7 @@ export default function TrashForm() {
         {"id":"sodaBottle", "name": "Soda Bottle", "count": 0, "img": SodaBottle},
         {"id":"wineBottle", "name": "Wine Bottle", "count": 0, "img": WineBottle},
         {"id":"food", "name": "Food", "count": 0, "img": Food},
-        {"id":"utensils", "name": "Utensils", "count": 0, "img": ForkDrink},
-        {"id":"hook", "name": "Hook", "count": 0, "img": Hook},
+        {"id":"plasticbag", "name": "Plastic Bag", "count": 0, "img": PlasticBag},
         {"id":"nail", "name": "Nail", "count": 0, "img": Nail},
     ])
     const [totalCount, setTotalCount] = useState(0)
@@ -69,7 +67,7 @@ export default function TrashForm() {
     }
 
   return (
-    <div style={{textAlign:'center', margin: 30}}>
+    <div style={{textAlign:'center', background:'#ABBBDF', margin: 30}}>
         <h1 style={{marginBottom:10}}>Collected Trash Form!</h1>
         <h4 style={{marginBottom:20}}>Total Count = {totalCount} </h4>
         <Box sx={{ flexGrow: 1 }}>
