@@ -45,7 +45,8 @@ export default function AlertDialog() {
         <DialogActions>
           <Button onClick={handleCloseCancel}>Cancel</Button>
           <Button> 
-          <Button component={Link} to="/congratulations" style={{marginBottom: 15}} variant="outlined" state={"variable"}>AGREE</Button>
+          <Button component={Link} to="/congratulations">AGREE</Button>
+          {/* <Button component={Link} to="/congratulations" style={{marginBottom: 15}} variant="outlined" state={"variable"}>AGREE</Button> */}
           </Button>
           {/* <Button onClick={handleCloseAgree} autoFocus>
             Agree
