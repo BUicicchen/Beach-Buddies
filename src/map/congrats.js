@@ -9,6 +9,9 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import firebase from '../firebase/firebase';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import BottomNavBar from '../bottomNavbar.js'
 
 const styles = {
     fontFamily: "sans-serif",
@@ -64,6 +67,11 @@ export default function Congratulations(props) {
     return (
 
     <div>
+
+    <Box sx={{ flexGrow: 1, height: '50px', bgcolor: "#355598" }} position="static" >
+          <Toolbar disableGutters></Toolbar>
+    </Box>
+    
     <style>{'body { background-color: #FFF1CA; }'}</style>
     {animationDone ? 
 
@@ -83,10 +91,12 @@ export default function Congratulations(props) {
                 numberOfPieces={400}
             />
         </div> 
+
+        <BottomNavBar ></BottomNavBar>
     </div>
     :
     <div>
-      <h1 style={{fontFamily: "Poppins", color: "#35559B"}}>
+      <h1 style={{fontFamily: "Poppins", color: "#35559B", paddingTop: "15px", paddingBottom: "15px"}}>
           <center>
           <font>  CONGRATULATIONS! </font>  
           </center>
@@ -112,6 +122,7 @@ export default function Congratulations(props) {
     </Card>
     </div>
     
+    <BottomNavBar></BottomNavBar>
   </div>
   )
   };
