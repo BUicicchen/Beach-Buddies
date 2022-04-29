@@ -10,6 +10,11 @@ import Warning from '../map/warning'
 import firebase from '../firebase/firebase';
 
 function BtnComponent(props) {
+  const [trashList, setTrashList] = useState([]);
+  const getTrash = (data) => {
+    setTrashList(data);
+  }
+
     // --- check location ---
     async function getUserLocation() {
       const beachData = await firebase.firestore().collection("beaches_MA_array_temp").where('id', '==', props.beachInfo.id).get();
@@ -52,7 +57,7 @@ function BtnComponent(props) {
         <div>
           <button className="stopwatch-btn stopwatch-btn-red" id="stopBtn"
                   onClick={props.stop}>Stop</button>
-          <Warning beach={props.beachInfo}></Warning>
+          <Warning beach={props.beachInfo} trashList={trashList} ></Warning>
         </div> : ""
       }
 
@@ -60,11 +65,11 @@ function BtnComponent(props) {
         <div>
           <button className="stopwatch-btn stopwatch-btn-gre"
                   onClick={props.resume}>Resume</button>
-        <Warning beach={props.beachInfo}></Warning>
+          <Warning beach={props.beachInfo} trashList={trashList}></Warning>
         </div> : ""
       }
 
-      <TrashForm></TrashForm>
+      <TrashForm getTrash={getTrash}></TrashForm>
 
      <div> 
         {/* open alert if not in region */}

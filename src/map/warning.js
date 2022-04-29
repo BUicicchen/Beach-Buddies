@@ -11,8 +11,8 @@ import { Link } from 'react-router-dom';
 export default function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
   const beach = props.beach;
-  console.log("props 2")
-  console.log("beach", beach)
+  const trashList = props.trashList
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -20,10 +20,6 @@ export default function AlertDialog(props) {
   const handleCloseCancel = () => {
     setOpen(false);
   };
-
-  // const handleCloseAgree = () => {
-  //   // return <Redirect to="/" />;
-  // };
 
   return (
     <div>
@@ -48,7 +44,7 @@ export default function AlertDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={handleCloseCancel} style={{marginBottom: 15, marginRight:15, borderBlockColor:"#355598", borderColor:"#355598", color:"#355598"}}>Cancel</Button>
-          <Button component={Link} to="/congratulations" style={{marginBottom: 15, borderBlockColor:"#355598", borderColor:"#355598", color:"#355598"}} variant="outlined" state={"variable"}>AGREE</Button>
+          <Button component={Link} to="/congratulations" style={{marginBottom: 15, borderBlockColor:"#355598", borderColor:"#355598", color:"#355598"}} variant="outlined" state={{beach:beach,trashList:trashList}}>AGREE</Button>
         </DialogActions>
       </Dialog>
     </div>

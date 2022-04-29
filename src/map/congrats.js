@@ -33,9 +33,11 @@ const defaultProps = {
 export default function Congratulations(props) {
     const [animationDone, setAnimationDone] = useState(true)
     const location = useLocation();
-    const beach = location.state;
-    console.log("props 3")
+    const beach = location.state.beach;
+    const trashList = location.state.trashList;
+    console.log("/congratulations")
     console.log(beach)
+    console.log(trashList)
     
     const [fadeProp, setFaceProp] = useState({
         fade : 'fade-out'

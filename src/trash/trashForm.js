@@ -35,9 +35,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 
-export default function TrashForm() {
-    //   const location = useLocation();
-    //   const selectedBeach = location.state;
+export default function TrashForm(props) {
 
     const [trashList, setTrashList] = useState([
         {"id":"can", "name": "Can", "count": 0, "img": Can},
@@ -50,6 +48,7 @@ export default function TrashForm() {
         {"id":"plasticbag", "name": "Plastic Bag", "count": 0, "img": PlasticBag},
         {"id":"nail", "name": "Nail", "count": 0, "img": Nail},
     ])
+    props.getTrash(trashList);
     const [totalCount, setTotalCount] = useState(0)
     function removeItem(item) {
         if (item.count > 0) {
