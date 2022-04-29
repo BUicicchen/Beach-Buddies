@@ -53,7 +53,7 @@ function Timer(props) {
   return (
     <div className="main-section" >
      <div className="clock-holder"  style={{background: "#35559B"}}>
-        <div className="stopwatch">
+        <div className="stopwatch" style={{paddingTop:0}}>
               <DisplayComponent time={time} style={{background:"#FFF1CA"}}/>
               <BtnComponent status={status} resume={resume} finish={finish} stop={stop} start={start} beachInfo={beachInfo}/>
         </div>

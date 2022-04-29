@@ -42,10 +42,10 @@ function BtnComponent(props) {
     };
 
   return (
-    <div>
+    <div style={{background: "#35559B"}}>
       {(props.status === 0)? 
         <button className="stopwatch-btn stopwatch-btn-gre"
-        onClick={props.start}>Start</button> : ""
+        onClick={props.start} style={{marginBottom:52}}>Start</button> : ""
       }
 
       {(props.status === 1)? 
@@ -64,10 +64,7 @@ function BtnComponent(props) {
         </div> : ""
       }
 
-      {(props.status === 1 || props.status === 2) ?
-        <TrashForm></TrashForm>:""
-      }
-     
+      <TrashForm></TrashForm>
 
      <div> 
         {/* open alert if not in region */}
@@ -76,7 +73,7 @@ function BtnComponent(props) {
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          PaperProps={{style:{borderRadius: 20, maxWidth: 400} }}
+          PaperProps={{style:{borderRadius: 20, maxWidth: 300} }}
         >
           <DialogContent>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>

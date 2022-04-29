@@ -117,7 +117,7 @@ export default function Congratulations(props) {
         </Typography>
       </CardContent>
       <CardActions style={{fontFamily: "Poppins", color: "#35559B", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <Button size="large">Email Me Results</Button>
+        <Button size="large" style={{textTransform: 'none', fontSize:18, fontWeight:600, color: "#35559B"}}>Download Certificate</Button>
       </CardActions>
     </Card>
     </div>

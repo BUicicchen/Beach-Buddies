@@ -183,17 +183,17 @@ export default function MapComponent() {
           onClose={handleCloseIntroPopup}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          PaperProps={{style:{backgroundColor: "#355598", borderRadius: 20, maxWidth: 400} }}
+          PaperProps={{style:{backgroundColor: "#355598", borderRadius: 20, maxWidth: 320} }}
         >
           {activeStep === 0 ?
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <Grid container spacing={2}>
-                <Grid item xs={9}>
-                  <h1 style={{color: '#FFF1CA', marginBottom:10}} >Welcome to Beach Buddy!</h1>
+                <Grid item xs={11}>
+                  <h1 style={{color: '#FFF1CA', marginBottom:10, fontSize:30}} >Welcome to Beach Buddy!</h1>
                 </Grid>
-                <Grid item xs={3}>
-                  <img src={beachBall} style={{width:70, marginLeft:-25}} />
+                <Grid item xs={1}>
+                  <img src={beachBall} style={{width:70, marginLeft:-50}} />
                 </Grid>
               </Grid>
               <p style={{color: '#FFF1CA', marginBottom:30, fontSize:20}} >Your favorite beach cleaning tool.</p>

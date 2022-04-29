@@ -67,7 +67,7 @@ export default function TrashForm() {
     }
 
   return (
-    <div style={{textAlign:'center', background:'#ABBBDF', margin: 30}}>
+    <div style={{textAlign:'center', backgroundColor:'#ABBBDF'}}>
         <h1 style={{marginBottom:10}}>Collected Trash Form!</h1>
         <h4 style={{marginBottom:20}}>Total Count = {totalCount} </h4>
         <Box sx={{ flexGrow: 1 }}>
@@ -86,6 +86,7 @@ export default function TrashForm() {
             ))}
             </Grid>
         </Box>
+        <div style={{paddingBottom:50}}></div>
     </div>
   );
 }
