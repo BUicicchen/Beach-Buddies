@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Warning from '../map/warning'
 import firebase from '../firebase/firebase';
 
-function BtnComponent(props) {
+function BtnComponent(props){
     // --- check location ---
     async function getUserLocation() {
       const beachData = await firebase.firestore().collection("beaches_MA_array_temp").where('id', '==', props.beachInfo.id).get();
@@ -65,7 +65,7 @@ function BtnComponent(props) {
       }
 
       {(props.status === 1 || props.status === 2) ?
-        <TrashForm></TrashForm>:""
+        <TrashForm beach={props.beachInfo}></TrashForm>:""
       }
      
 
