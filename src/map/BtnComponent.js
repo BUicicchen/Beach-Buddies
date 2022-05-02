@@ -69,14 +69,7 @@ function BtnComponent(props) {
         </div> : ""
       }
 
-<<<<<<< HEAD
-      {(props.status === 1 || props.status === 2) ?
-        <TrashForm beach={props.beachInfo}></TrashForm>:""
-      }
-     
-=======
       <TrashForm getTrash={getTrash}></TrashForm>
->>>>>>> 3bbda10e15f74b42c4fdd6b5fec6b7cbe8c1f41a
 
      <div> 
         {/* open alert if not in region */}

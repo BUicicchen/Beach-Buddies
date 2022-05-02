@@ -8,7 +8,10 @@ export default function Certificate(props) {
     const location = useLocation();
     const beach = location.state.beach;
     const trashList = location.state.trashList;
-    console.log(beach, trashList)
+    const time = location.state.currTime;
+    const Day = new Date(time);
+    console.log(Day)
+    console.log(beach, trashList, time)
     //console.log(trashList[1].name)
   return (
       //not setting PDF size for borders at PDF converter will resize the elements
@@ -45,13 +48,20 @@ export default function Certificate(props) {
             <p>During their time with Beach Buddies, they have helped clean up this much trash:</p>
         </div>
 
-        <Summary />
+        {/* <Summary /> */}
+
+        <table>
+        <tr><td>Type of Trash</td><td>Amount</td></tr>
+          {trashList.map((value, index) => {
+            return <tr><td>{value.name}</td><td>{value.count}</td></tr>
+          })}
+        </table>
        
         {/** bottom date, signature */}
         <div style={{ margin:'20px', display:'flex', justifyContent:'space-around'}}>
           
           <div>
-            <p>Date __TIMESTAMP__</p>
+            <p>Date {time}</p>
           </div>
 
           <div style={{display:'flex', justifyContent:'space-around'}}>
