@@ -38,15 +38,15 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function TrashForm(props) {
 
     const [trashList, setTrashList] = useState([
-        {"id":"can", "name": "Can", "count": 0, "img": Can},
-        {"id":"cigarette", "name": "Cigarette", "count": 0, "img": Cigarette},
-        {"id":"needle", "name": "Needle", "count": 0, "img": Needle},
-        {"id":"facemask", "name": "Face Mask", "count": 0, "img": FaceMask},
-        {"id":"sodaBottle", "name": "Soda Bottle", "count": 0, "img": SodaBottle},
-        {"id":"wineBottle", "name": "Wine Bottle", "count": 0, "img": WineBottle},
+        {"id":"can", "name": "Cans", "count": 0, "img": Can},
+        {"id":"cigarette", "name": "Cigarettes", "count": 0, "img": Cigarette},
+        {"id":"needle", "name": "Medical", "count": 0, "img": Needle},
+        {"id":"facemask", "name": "Face Masks", "count": 0, "img": FaceMask},
+        {"id":"sodaBottle", "name": "Plastic Bottles", "count": 0, "img": SodaBottle},
+        {"id":"wineBottle", "name": "Glass Bottles", "count": 0, "img": WineBottle},
         {"id":"food", "name": "Food", "count": 0, "img": Food},
-        {"id":"plasticbag", "name": "Plastic Bag", "count": 0, "img": PlasticBag},
-        {"id":"nail", "name": "Nail", "count": 0, "img": Nail},
+        {"id":"plasticbag", "name": "To-Go Bags", "count": 0, "img": PlasticBag},
+        {"id":"nail", "name": "Nails", "count": 0, "img": Nail},
     ])
     props.getTrash(trashList);
     const [totalCount, setTotalCount] = useState(0)

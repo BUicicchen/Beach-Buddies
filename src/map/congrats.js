@@ -13,6 +13,15 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import BottomNavBar from '../bottomNavbar.js'
 import { Link } from 'react-router-dom';
+//Name Pop-Up
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Grid from '@mui/material/Grid';
+import { styled } from "@mui/material/styles";
 
 const styles = {
     fontFamily: "sans-serif",
@@ -67,6 +76,45 @@ export default function Congratulations(props) {
       setAnimationDone(!animationDone)
     };
 
+    //Button Download funcionality
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    //Pop-up Styling 
+    const StyledTextField = styled(TextField)({
+      "& label": {
+        color: "#FFF1CA"
+      },
+      "&:hover label": {
+        fontWeight: 700
+      },
+      "& label.Mui-focused": {
+        color: "#FFF1CA"
+      },
+      "& .MuiInput-underline:after": {
+        borderBottomColor: "#FFF1CA"
+      },
+      
+      "& .MuiOutlinedInput-root": {
+        color: "#FFF1CA",
+        "& fieldset": {
+          borderColor: "#FFF1CA"
+        },
+        "&:hover fieldset": {
+          borderColor: "#FFF1CA",
+          borderWidth: 2
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: "#FFF1CA"
+        }
+      }
+    });
+    
     return (
 
     <div>
@@ -120,10 +168,37 @@ export default function Congratulations(props) {
         </Typography>
       </CardContent>
       <CardActions style={{fontFamily: "Poppins", color: "#35559B", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <Button component={Link} to="/certificate"  state={{beach:beach,trashList:trashList}} style={{textTransform: 'none', fontSize:18, fontWeight:600, color: "#35559B"}}>Download Certificate</Button>
+        {/**Download Certificate  */}
+        <Button style={{textTransform: 'none', fontSize:18, fontWeight:600, color: "#35559B"}} onClick={handleClickOpen}>
+          Download Certificate
+        </Button>
+        <Dialog 
+          open={open} 
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          PaperProps={{style:{backgroundColor: "#355598", borderRadius: 20, maxWidth: 400} }}
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+            <Grid>
+                <Grid>
+                  <h1 style={{color: '#FFF1CA', marginBottom:20, textAlign: 'center'}}>Download Results</h1>
+                  <p style={{color: '#FFF1CA', marginBottom:30, fontSize:20, textAlign: 'center'}}>Enter your full name to be on certificate.</p>
+                </Grid>
+              </Grid>
+            </DialogContentText>
+            <StyledTextField fullWidth label="Name"/>
+          </DialogContent>
+          <DialogActions>
+            <Button component={Link} to="/certificate"  state={{beach:beach,trashList:trashList}} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}}>Continue</Button>
+
+          </DialogActions>
+        </Dialog>
       </CardActions>
     </Card>
     </div>
+    
     
     <BottomNavBar></BottomNavBar>
   </div>
