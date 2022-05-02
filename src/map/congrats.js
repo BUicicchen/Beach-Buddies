@@ -12,14 +12,10 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import BottomNavBar from '../bottomNavbar.js'
 // new imports
+import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
 
 const styles = {
     fontFamily: "sans-serif",
@@ -175,7 +171,7 @@ export default function Congratulations(props) {
       })}
     </List>
       <CardActions style={{fontFamily: "Poppins", color: "#35559B", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <Button size="large" style={{textTransform: 'none', fontSize:18, fontWeight:600, color: "#35559B"}}>Download Certificate</Button>
+        <Button component={Link} to="/certificate"  state={{beach:beach,trashList:trashList}} style={{textTransform: 'none', fontSize:18, fontWeight:600, color: "#35559B"}}>Download Certificate</Button>
       </CardActions>
     </Card>
     {/* {trashList.map((item, index) => (
@@ -184,7 +180,6 @@ export default function Congratulations(props) {
                     <img src={item.img} style={{width:100}} />
                     <div></div>
                     <div style={{textAlign:'center', display:'inline-flex'}}>
-
                     </div>
                 </Grid>
             ))} */}

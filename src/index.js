@@ -12,6 +12,7 @@ import reportWebVitals from './reportWebVitals';
 import Beach from "./map/beach";
 import Congratulations from "./map/congrats";
 import TrashForm from "./trash/trashForm";
+import Certificate from './certificate/Certificate';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.render(
         <Route path="/" element={<App />} />
         <Route path="beach" element={<Beach />} />
         <Route path="congratulations" element={<Congratulations />} />
+        <Route path="certificate" element={<Certificate/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
