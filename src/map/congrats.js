@@ -1,8 +1,5 @@
 import React from "react";
 import { useLocation } from 'react-router-dom';
-import { render } from "react-dom";
-import PropTypes from "prop-types";
-// import sizeMe from "react-sizeme";
 import Confetti from "react-confetti";
 import {useState, useEffect} from 'react';
 //new imports
@@ -12,6 +9,9 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import firebase from '../firebase/firebase';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import BottomNavBar from '../bottomNavbar.js'
 
 const styles = {
     fontFamily: "sans-serif",
@@ -29,52 +29,15 @@ const defaultProps = {
     border: 1,
     style: { width: "5rem", height: "5rem" }
   };
-// const styling = StyleSheet.create({
-//     input: {
-//       width: 300,
-//       height: 40,
-//       backgroundColor: "#fff",
-//       paddingVertical: 10,
-//       paddingHorizontal: 15,
-//       borderColor: "#ccc",
-//       borderWidth: 1,
-//       borderRadius: 15,
-//       fontSize: 16,
-//     },
-//   });
-
-// const stylesOpen = {
-//   fontFamily: "sans-serif",
-//   textAlign: "center",
-//   width: "100%",
-//   height: "100vh",
-//   transition: 0.1,
-//   opacity: 1,
-// };
-// const stylesFade = {
-//     fontFamily: "sans-serif",
-//     textAlign: "center",
-//     width: "100%",
-//     height: "100vh",
-//     // transition: 0.5,
-//     opacity: 0,
-// };
 
 export default function Congratulations(props) {
     const [animationDone, setAnimationDone] = useState(true)
     const location = useLocation();
-    const beach = location.state;
-    console.log("props 3")
+    const beach = location.state.beach;
+    const trashList = location.state.trashList;
+    console.log("/congratulations")
     console.log(beach)
-
-
-    // const beach = props.beach;
-    // const propTypes = {
-    //   size: PropTypes.shape({
-    //     width: PropTypes.number,
-    //     height: PropTypes.number
-    //   })
-    // };
+    console.log(trashList)
     
     const [fadeProp, setFaceProp] = useState({
         fade : 'fade-out'
@@ -88,13 +51,7 @@ export default function Congratulations(props) {
         async function updateBeachData(){
             console.log(created)
             await firebase.firestore().collection("beaches_MA").doc(beach.doc_id).update({lastCleaned: created});
-            // console.log(beachData)
-            // const fbeachData = beachData.docs[0].data();
             console.log(beach, currTime)
-            // await updateDoc(beach, {
-            //     last_cleaned: currTime
-            //   });
-            // fbeachData.update({'lastCleaned' : currTime});
             console.log(beach)
         }
        
@@ -110,15 +67,15 @@ export default function Congratulations(props) {
     };
 
     return (
-// {
-//     true ? <div></div>
-//     : <div></div>
-// }
 
     <div>
+
+    <Box sx={{ flexGrow: 1, height: '50px', bgcolor: "#355598" }} position="static" >
+          <Toolbar disableGutters></Toolbar>
+    </Box>
+    
     <style>{'body { background-color: #FFF1CA; }'}</style>
     {animationDone ? 
-    // <div className={fadeProp.fade}>
 
     <div style={styles}>
         <div
@@ -134,132 +91,40 @@ export default function Congratulations(props) {
                 gravity={0.4}
                 run={animationDone}
                 numberOfPieces={400}
-                // {...size}
             />
         </div> 
+
+        <BottomNavBar ></BottomNavBar>
     </div>
     :
-    // <body style="background-color:grey;">
-
-    // </body>
     <div>
-      <h1 style={{fontFamily: "Poppins", color: "#35559B"}}>
+      <h1 style={{fontFamily: "Poppins", color: "#35559B", paddingTop: "15px", paddingBottom: "15px"}}>
           <center>
           <font>  CONGRATULATIONS! </font>  
           </center>
       </h1>
-      {/* <Box display="flex" flexDirection="column" alignItems="flex-start">
-        <Box borderRadius="25%" {...defaultProps}></Box>
-        <p id="rcorners2">Rounded corners!</p>
-        </Box> */}
     </div>
     } 
-    {/* style={{fontFamily: "Poppins", color: "#FFF1CA"}}  */}
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}> 
     <Card sx={{ minWidth: 275 }} style={{borderRadius: 50, width:"80%",minHeight:"80%", backgroundColor: "#ABBBDF"}}>
       <CardContent>
-        {/* <Typography style={{fontFamily: "Poppins", color: "#FFF1CA"}} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography> */}
-        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA"}} variant="h5" component="div">
-          {/* be{bull}nev{bull}o{bull}lent */}
-        </Typography>
-        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", display: 'flex', justifyContent: 'center', alignItems: 'center'}} sx={{ mb: 1.5 }} color="text.secondary">
+        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: "bold"}} sx={{ mb: 2.5 }} color="text.secondary">
           Clean Up Statistics
         </Typography>
-        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA"}} variant="body2">
+        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold"}} sx={{ mb: 2.5 }} variant="body2">
           Time
-          <br />
-          {'"Amount Cleaned"'}
+        </Typography>
+        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold"}} variant="body2">
+          Amount Cleaned
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Email Me Results</Button>
+      <CardActions style={{fontFamily: "Poppins", color: "#35559B", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <Button size="large" style={{textTransform: 'none', fontSize:18, fontWeight:600, color: "#35559B"}}>Download Certificate</Button>
       </CardActions>
     </Card>
     </div>
     
+    <BottomNavBar></BottomNavBar>
   </div>
   )
   };
-
-
-
-
-
-
-// import React from "react";
-// import { render } from "react-dom";
-// import PropTypes from "prop-types";
-// // import sizeMe from "react-sizeme";
-// import Confetti from "react-confetti";
-
-// const styles = {
-//   fontFamily: "sans-serif",
-//   textAlign: "center",
-//   width: "100%",
-//   height: "100vh",
-// };
-
-// const DimensionedExample = (
-//   class Example extends React.PureComponent {
-//     state = {
-//       animationDone: true
-//     };
-
-//     static propTypes = {
-//       size: PropTypes.shape({
-//         width: PropTypes.number,
-//         height: PropTypes.number
-//       })
-//     };
-
-//     componentDidMount() {
-//       setTimeout(() => {
-//         this.toggleConfetti();
-//       }, 3000);
-//     }
-
-//     toggleConfetti = () => {
-//       this.setState({ animationDone: !this.state.animationDone });
-//     };
-    
-//     render() {
-//         // if (!this.state.animationDone) {
-//             return (
-//                 <div
-//             style={{
-//                 position: "absolute",
-//                 top: 0,
-//                 left: 0,
-//                 width: "100%",
-//                 height: "100%"
-//             }}
-//             >
-//             <Confetti
-//                 gravity={0.4}
-//                 run={this.state.animationDone}
-//                 numberOfPieces={400}
-//                 {...this.props.size}
-//             />
-//             </div> 
-//             )
-//         // } else {
-//         //     <div>
-//         //         <h1>clear!</h1>
-//         //     </div>
-//         // }
-      
-//     }
-//   }
-// );
-
-// const App = () => (
-//   <div style={styles}>
-//     <DimensionedExample />
-//     <h2>Start editing to see some magic happen {"\u2728"}</h2>
-//   </div>
-// );
-
-// export default App
-

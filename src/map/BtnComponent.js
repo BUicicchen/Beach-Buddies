@@ -9,7 +9,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Warning from '../map/warning'
 import firebase from '../firebase/firebase';
 
-function BtnComponent(props){
+function BtnComponent(props) {
+  const [trashList, setTrashList] = useState([]);
+  const getTrash = (data) => {
+    setTrashList(data);
+  }
+
     // --- check location ---
     async function getUserLocation() {
       const beachData = await firebase.firestore().collection("beaches_MA_array_temp").where('id', '==', props.beachInfo.id).get();
@@ -42,17 +47,17 @@ function BtnComponent(props){
     };
 
   return (
-    <div>
+    <div style={{background: "#35559B"}}>
       {(props.status === 0)? 
         <button className="stopwatch-btn stopwatch-btn-gre"
-        onClick={props.start}>Start</button> : ""
+        onClick={props.start} style={{marginBottom:52}}>Start</button> : ""
       }
 
       {(props.status === 1)? 
         <div>
           <button className="stopwatch-btn stopwatch-btn-red" id="stopBtn"
                   onClick={props.stop}>Stop</button>
-          <Warning beach={props.beachInfo}></Warning>
+          <Warning beach={props.beachInfo} trashList={trashList} ></Warning>
         </div> : ""
       }
 
@@ -60,14 +65,18 @@ function BtnComponent(props){
         <div>
           <button className="stopwatch-btn stopwatch-btn-gre"
                   onClick={props.resume}>Resume</button>
-        <Warning beach={props.beachInfo}></Warning>
+          <Warning beach={props.beachInfo} trashList={trashList}></Warning>
         </div> : ""
       }
 
+<<<<<<< HEAD
       {(props.status === 1 || props.status === 2) ?
         <TrashForm beach={props.beachInfo}></TrashForm>:""
       }
      
+=======
+      <TrashForm getTrash={getTrash}></TrashForm>
+>>>>>>> 3bbda10e15f74b42c4fdd6b5fec6b7cbe8c1f41a
 
      <div> 
         {/* open alert if not in region */}
@@ -76,7 +85,7 @@ function BtnComponent(props){
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          PaperProps={{style:{borderRadius: 20, maxWidth: 400} }}
+          PaperProps={{style:{borderRadius: 20, maxWidth: 300} }}
         >
           <DialogContent>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
