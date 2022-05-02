@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation } from 'react-router-dom';
 import Confetti from "react-confetti";
 import {useState, useEffect} from 'react';
-//new imports
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -12,6 +11,15 @@ import firebase from '../firebase/firebase';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import BottomNavBar from '../bottomNavbar.js'
+// new imports
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import CommentIcon from '@mui/icons-material/Comment';
 
 const styles = {
     fontFamily: "sans-serif",
@@ -29,6 +37,7 @@ const defaultProps = {
     border: 1,
     style: { width: "5rem", height: "5rem" }
   };
+
 
 export default function Congratulations(props) {
     const [animationDone, setAnimationDone] = useState(true)
@@ -65,6 +74,23 @@ export default function Congratulations(props) {
     const toggleConfetti = () => {
       setAnimationDone(!animationDone)
     };
+
+    // new imports
+    const [checked, setChecked] = React.useState([0]);
+
+    const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+    }
+
 
     return (
 
@@ -118,12 +144,51 @@ export default function Congratulations(props) {
           Amount Cleaned
         </Typography>
       </CardContent>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: "#ABBBDF" }}>
+      {[0, 1, 2, 3].map((value) => {
+        const labelId = `checkbox-list-label-${value}`;
+
+        return (
+          <ListItem
+            key={value}
+            // secondaryAction={
+            //   <IconButton edge="end" aria-label="comments">
+            //     <CommentIcon />
+            //   </IconButton>
+            // }
+            disablePadding
+          >
+            <ListItemText role={undefined} onClick={handleToggle(value)} dense>
+              {/* <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  // checked={checked.indexOf(value) !== -1}
+                  // tabIndex={-1}
+                  disableRipple
+                  inputProps={{ 'aria-labelledby': labelId }}
+                />
+              </ListItemIcon> */}
+              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+            </ListItemText>
+          </ListItem>
+        );
+      })}
+    </List>
       <CardActions style={{fontFamily: "Poppins", color: "#35559B", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Button size="large" style={{textTransform: 'none', fontSize:18, fontWeight:600, color: "#35559B"}}>Download Certificate</Button>
       </CardActions>
     </Card>
+    {/* {trashList.map((item, index) => (
+                <Grid item xs={2} sm={4} md={4} key={item.id}>
+                    <h4>{item.name}</h4>
+                    <img src={item.img} style={{width:100}} />
+                    <div></div>
+                    <div style={{textAlign:'center', display:'inline-flex'}}>
+
+                    </div>
+                </Grid>
+            ))} */}
     </div>
-    
     <BottomNavBar></BottomNavBar>
   </div>
   )
