@@ -18,7 +18,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Can from '../public/assets/can_NEW.svg';
-import Cigarette from '../public/assets/smoking.svg';
+import Cigarette from '../public/assets/cigarette_NEW.svg';
 import SodaBottle from '../public/assets/plastic-bottle_NEW.svg';
 import WineBottle from '../public/assets/glass-bottle_NEW.svg';
 import FaceMask from '../public/assets/mask_NEW.svg';
@@ -48,6 +48,7 @@ export default function TrashForm(props) {
         {"id":"plasticbag", "name": "To-Go Bags", "count": 0, "img": PlasticBag},
         {"id":"nail", "name": "Nails", "count": 0, "img": Nail},
     ])
+    // console.log(props)
     props.getTrash(trashList);
     const [totalCount, setTotalCount] = useState(0)
     function removeItem(item) {
