@@ -1,0 +1,18 @@
+.Summary {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    
+    table, th, td {    
+        border: 1px solid black;  
+        margin-left: auto;  
+        margin-right: auto;  
+        border-collapse: collapse;    
+        width: 80%;  
+        text-align: left;
+        table-layout: fixed;  
+        } 
+    
