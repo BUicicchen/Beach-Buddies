@@ -271,14 +271,14 @@ export default function MapComponent() {
               {window.innerWidth <= 760 ?
                 <ul>
                   {filteredBeaches.slice(0, 1).map((beach) => (
-                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} component={Link} to="/beach" variant="filled" state={beach}>
+                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} component={Link} to="/beach" variant="filled" state={{selectedBeach:beach}}>
                         {beach.name}
                       </Button>
                   ))}
                 </ul> :
                 <ul>
                   {filteredBeaches.slice(0, 5).map((beach) => (
-                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} component={Link} to="/beach" variant="filled" state={beach}>
+                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} component={Link} to="/beach" variant="filled" state={{selectedBeach:beach}}>
                         {beach.name}
                       </Button>
                   ))}

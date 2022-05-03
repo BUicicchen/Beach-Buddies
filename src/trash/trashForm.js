@@ -38,17 +38,16 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function TrashForm(props) {
 
     const [trashList, setTrashList] = useState([
-        {"id":"can", "name": "Can", "count": 0, "img": Can},
-        {"id":"cigarette", "name": "Cigarette", "count": 0, "img": Cigarette},
-        {"id":"needle", "name": "Needle", "count": 0, "img": Needle},
-        {"id":"facemask", "name": "Face Mask", "count": 0, "img": FaceMask},
-        {"id":"sodaBottle", "name": "Soda Bottle", "count": 0, "img": SodaBottle},
-        {"id":"wineBottle", "name": "Wine Bottle", "count": 0, "img": WineBottle},
+        {"id":"can", "name": "Cans", "count": 0, "img": Can},
+        {"id":"cigarette", "name": "Cigarettes", "count": 0, "img": Cigarette},
+        {"id":"needle", "name": "Medical", "count": 0, "img": Needle},
+        {"id":"facemask", "name": "Face Masks", "count": 0, "img": FaceMask},
+        {"id":"sodaBottle", "name": "Plastic Bottles", "count": 0, "img": SodaBottle},
+        {"id":"wineBottle", "name": "Glass Bottles", "count": 0, "img": WineBottle},
         {"id":"food", "name": "Food", "count": 0, "img": Food},
-        {"id":"plasticbag", "name": "Plastic Bag", "count": 0, "img": PlasticBag},
-        {"id":"nail", "name": "Nail", "count": 0, "img": Nail},
+        {"id":"plasticbag", "name": "To-Go Bags", "count": 0, "img": PlasticBag},
+        {"id":"nail", "name": "Nails", "count": 0, "img": Nail},
     ])
-    // console.log(props)
     props.getTrash(trashList);
     const [totalCount, setTotalCount] = useState(0)
     function removeItem(item) {
@@ -67,26 +66,33 @@ export default function TrashForm(props) {
     }
 
   return (
-    <div style={{textAlign:'center', backgroundColor:'#ABBBDF'}}>
-        <h1 style={{marginBottom:10}}>Collected Trash Form!</h1>
-        <h4 style={{marginBottom:20}}>Total Count = {totalCount} </h4>
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {trashList.map((item, index) => (
-                <Grid item xs={2} sm={4} md={4} key={item.id}>
-                    <h4>{item.name}</h4>
-                    <img src={item.img} style={{width:100}} />
-                    <div></div>
-                    <div style={{textAlign:'center', display:'inline-flex'}}>
-                        <Button variant="outlined" style={{width:2}} onClick={() => {removeItem(item)}}><RemoveIcon /></Button>
-                        <p style={{margin:10}} >{item.count}</p>
-                        <Button variant="outlined" style={{width:2}} onClick={() => {addItem(item)}}><AddIcon /></Button>
-                    </div>
-                </Grid>
-            ))}
-            </Grid>
+    <div>
+        <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+        <Box style={{backgroundColor: "#ABBBDF",paddingTop:10, paddingBottom:10, width:250, borderRadius:20}}>
+            <h2>Total Count = {totalCount} </h2>
         </Box>
-        <div style={{paddingBottom:50}}></div>
+        </div>
+        <div style={{height:10}}></div>
+        <div style={{textAlign:'center', backgroundColor:'#ABBBDF', borderRadius:40}}>
+            <h2 style={{paddingTop:20,marginBottom:20}}>Collected Trash Form!</h2>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {trashList.map((item, index) => (
+                    <Grid item xs={2} sm={4} md={4} key={item.id}>
+                        <h4>{item.name}</h4>
+                        <img src={item.img} style={{width:100}} />
+                        <div></div>
+                        <div style={{textAlign:'center', display:'inline-flex'}}>
+                            <Button variant="outlined" style={{width:2}} onClick={() => {removeItem(item)}}><RemoveIcon /></Button>
+                            <p style={{margin:10}} >{item.count}</p>
+                            <Button variant="outlined" style={{width:2}} onClick={() => {addItem(item)}}><AddIcon /></Button>
+                        </div>
+                    </Grid>
+                ))}
+                </Grid>
+            </Box>
+            <div style={{paddingBottom:50}}></div>
+        </div>
     </div>
   );
 }
