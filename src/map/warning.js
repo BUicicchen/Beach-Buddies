@@ -5,7 +5,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 export default function AlertDialog(props) {

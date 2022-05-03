@@ -7,6 +7,14 @@ import BBlogo from "../public/assets/logo_updated.png";
 import { useRef } from "react";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 
 const Certificate = (props) => {
   //pass in variables
@@ -35,10 +43,6 @@ const Certificate = (props) => {
   };
   return (
     <div>
-      {/** download button */}
-      <div className="mb5">
-        <button onClick={printDocument}>Print</button>
-      </div>
       <div id="divToPrint" ref={inputRef}>
         {/** certification */}
         <div
@@ -76,22 +80,22 @@ const Certificate = (props) => {
               </div>
 
               {/* middle of header*/}
-              <div style={{ justifyContent: "center" }}>
-                <p style={{ fontSize: "36px", fontWeight: "bold" }}>
+              <div style={{ justifyContent: "center", paddingTop:20, paddingLeft:20 }}>
+                <p style={{ fontSize: "36px", fontWeight: "bold", color: "#35559B" }}>
                   Volunteer Certificate
                 </p>
               </div>
 
               {/* right side of header*/}
               <div style={{ textAlign: "end", marginTop: "1px" }}>
-                <p style={{ fontSize: "12px", fontWeight: "bold" }}>
+                <p style={{ fontSize: "16px", fontWeight: "bold" }}>
                   Beach Buddies
                 </p>
               </div>
             </div>
 
-            <div style={{ textAlign: "center", margin: "20px" }}>
-              <p>This Certificate is presented to </p>
+            <div style={{ textAlign: "center", marginTop: "-30px" }}>
+              <p >This Certificate is presented to </p>
               <p>{name}</p>
             </div>
 
@@ -107,20 +111,31 @@ const Certificate = (props) => {
 
             {/* <Summary /> */}
 
-            <table>
-              <tr>
-                <td>Type of Trash</td>
-                <td>Amount</td>
-              </tr>
-              {trashList.map((value, index) => {
-                return (
-                  <tr>
-                    <td>{value.name}</td>
-                    <td>{value.count}</td>
-                  </tr>
-                );
-              })}
-            </table>
+            <div style={{paddingLeft:50,paddingRight:50}}>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Type of Trash</TableCell>
+                    <TableCell align="right">Amount</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {trashList.map((value) => (
+                    <TableRow
+                      key={value.name}
+                      sx={{ border: 0 }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {value.name}
+                      </TableCell>
+                      <TableCell align="right">{value.count}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            </div>
 
             {/** bottom date, signature */}
             <div
@@ -154,6 +169,11 @@ const Certificate = (props) => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/** download button */}
+      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+        <Button variant="outlined" onClick={printDocument} style={{marginBottom:20,borderBlockColor:"#355598", borderColor:"#355598", color:"#355598", justifyContent: "center", alignItem:'center'}}>Print</Button>
       </div>
     </div>
   );
