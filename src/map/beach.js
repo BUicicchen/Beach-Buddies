@@ -12,7 +12,7 @@ export default function Beach() {
     <div style={{textAlign:'center',backgroundColor: "#35559B", height:'calc(222vh)'}}>
         <h1 style={{paddingTop:30}}>{selectedBeach.name}</h1>
         <div>
-          <Timer beachInfo={selectedBeach}></Timer>       
+          <Timer beachInfo={selectedBeach} ></Timer>       
         </div>
         <BottomNavbar></BottomNavbar>
     </div>

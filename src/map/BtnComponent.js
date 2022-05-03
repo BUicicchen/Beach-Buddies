@@ -14,6 +14,7 @@ function BtnComponent(props) {
   const getTrash = (data) => {
     setTrashList(data);
   }
+  const time = props.time;
 
     // --- check location ---
     async function getUserLocation() {
@@ -57,7 +58,7 @@ function BtnComponent(props) {
         <div>
           <button className="stopwatch-btn stopwatch-btn-red" id="stopBtn"
                   onClick={props.stop}>Stop</button>
-          <Warning beach={props.beachInfo} trashList={trashList} ></Warning>
+          <Warning beach={props.beachInfo} trashList={trashList} time={time} ></Warning>
         </div> : ""
       }
 
@@ -65,7 +66,7 @@ function BtnComponent(props) {
         <div>
           <button className="stopwatch-btn stopwatch-btn-gre"
                   onClick={props.resume}>Resume</button>
-          <Warning beach={props.beachInfo} trashList={trashList}></Warning>
+          <Warning beach={props.beachInfo} trashList={trashList} time={time}></Warning>
         </div> : ""
       }
 

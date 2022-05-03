@@ -76,8 +76,9 @@ export default function MapComponent() {
   const [here,setHere] = useState(false);
   const [check,setCheck] = useState(true);
   const [started,setStarted] = useState(false);
-  async function getUserLocation() {
-    const beachData = await firebase.firestore().collection("beaches_MA_array_temp").where('id', '==', beachPopup.id).get();
+  async function getUserLocation(beach) {
+    setBeachPopup(beach)
+    const beachData = await firebase.firestore().collection("beaches_MA_array_temp").where('id', '==', beach.id).get();
     const fbeachData = beachData.docs[0].data();
     navigator.geolocation.getCurrentPosition((pos) => {
       const lat_max = fbeachData.boundry[0]+.01;
@@ -88,7 +89,7 @@ export default function MapComponent() {
         setCheck(false);
         handleClickOpen()
       } else {
-        navigate('/beach',{state:{ selectedBeach: beachPopup }});
+        navigate('/beach',{state:{ selectedBeach: beach }});
         setHere(false);
         setCheck(true);
         setStarted(false);
@@ -271,14 +272,14 @@ export default function MapComponent() {
               {window.innerWidth <= 760 ?
                 <ul>
                   {filteredBeaches.slice(0, 1).map((beach) => (
-                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} component={Link} to="/beach" variant="filled" state={{selectedBeach:beach}}>
+                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} onClick={()=>{getUserLocation(beach); checkLocation()}}>
                         {beach.name}
                       </Button>
                   ))}
                 </ul> :
                 <ul>
                   {filteredBeaches.slice(0, 5).map((beach) => (
-                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} component={Link} to="/beach" variant="filled" state={{selectedBeach:beach}}>
+                      <Button style={{borderRadius: 10,backgroundColor: "#FFF1CA", margin: 5}} onClick={()=>{getUserLocation(beach); checkLocation()}}>
                         {beach.name}
                       </Button>
                   ))}
@@ -329,15 +330,9 @@ export default function MapComponent() {
                   <div style={{textAlign: 'left', color:"#ffffff", paddingBottom: 10}}> <b>Last cleaned:</b> {convertTime(beachPopup.lastCleaned.seconds).toString().substring(0,15)} </div>
                   <div style={{textAlign: 'left', color:"#ffffff", paddingBottom: 20}}> <b>Marine Life:</b> { beachPopup.marineLife } </div>
 
-                  
-
-
-
-
-
               <div>
                 <div> 
-                    <Button onClick={()=>{getUserLocation(); checkLocation()}} style={{marginBottom: 15, backgroundColor:'#355598', border:"2px white solid",}} variant="contained" >Get Cleaning!</Button>
+                    <Button onClick={()=>{getUserLocation(beachPopup); checkLocation()}} style={{marginBottom: 15, backgroundColor:'#355598', border:"2px white solid",}} variant="contained" >Get Cleaning!</Button>
                     {
                       started ?
                         <div className="rotate">

@@ -55,11 +55,12 @@ export default function Congratulations(props) {
       return updatedSum;
     }, 0);
     const [name, setName] = useState("");
+    const time = location.state.time;
     console.log("/congratulations")
     console.log(beach)
     console.log(trashList)
     console.log(totalCount)
-    const currTime = new Date()
+    console.log(time)
     
     const [fadeProp, setFaceProp] = useState({
         fade : 'fade-out'
@@ -71,10 +72,10 @@ export default function Congratulations(props) {
 
         updateBeachData();
         async function updateBeachData(){
-            console.log(created)
+            // console.log(created)
             await firebase.firestore().collection("beaches_MA").doc(beach.doc_id).update({lastCleaned: created});
-            console.log(beach, currTime)
-            console.log(beach)
+            // console.log(beach, currTime)
+            // console.log(beach)
         }
        
         
@@ -189,10 +190,10 @@ export default function Congratulations(props) {
         <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: "bold", fontSize:25}} sx={{ mb: 2.5 }} color="text.secondary">
           Clean Up Statistics
         </Typography>
-        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold"}} sx={{ mb: 2.5 }} variant="body2">
-          Time
+        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold", fontSize:18}} sx={{ mb: 2.5 }} variant="body2">
+          Time: {time.h} Hours {time.m} Minutes {time.s + 1} Seconds
         </Typography>
-        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold"}} variant="body2">
+        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold", fontSize:18}} variant="body2">
           Amount Cleaned: {totalCount}
         </Typography>
       </CardContent>
