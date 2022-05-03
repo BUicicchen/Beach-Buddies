@@ -14,6 +14,7 @@ const Certificate = (props) => {
   const beach = location.state.beach;
   const trashList = location.state.trashList;
   const time = location.state.currTime;
+  const name = location.state.name;
   const Day = new Date(time);
   console.log(Day);
   console.log(beach, trashList, time);
@@ -91,7 +92,7 @@ const Certificate = (props) => {
 
             <div style={{ textAlign: "center", margin: "20px" }}>
               <p>This Certificate is presented to </p>
-              <p>__USER_NAME__</p>
+              <p>{name}</p>
             </div>
 
             <div style={{ textAlign: "center", margin: "20px" }}>

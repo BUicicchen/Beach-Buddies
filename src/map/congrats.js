@@ -50,9 +50,15 @@ export default function Congratulations(props) {
     const location = useLocation();
     const beach = location.state.beach;
     const trashList = location.state.trashList;
+    const totalCount = trashList.reduce(function(sum, item) {
+      const updatedSum = sum + item.count;
+      return updatedSum;
+    }, 0);
+    const [name, setName] = useState("");
     console.log("/congratulations")
     console.log(beach)
     console.log(trashList)
+    console.log(totalCount)
     const currTime = new Date()
     
     const [fadeProp, setFaceProp] = useState({
@@ -178,48 +184,32 @@ export default function Congratulations(props) {
     </div>
     } 
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}> 
-    <Card sx={{ minWidth: 275 }} style={{borderRadius: 50, width:"80%",minHeight:"80%", backgroundColor: "#ABBBDF"}}>
+    <Card sx={{ minWidth: 275 }} style={{borderRadius: 50, width:"80%",minHeight:"80%", backgroundColor: "#ABBBDF", borderColor:"#35559B"}}>
       <CardContent>
-        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: "bold"}} sx={{ mb: 2.5 }} color="text.secondary">
+        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: "bold", fontSize:25}} sx={{ mb: 2.5 }} color="text.secondary">
           Clean Up Statistics
         </Typography>
         <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold"}} sx={{ mb: 2.5 }} variant="body2">
           Time
         </Typography>
         <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold"}} variant="body2">
-          Amount Cleaned
+          Amount Cleaned: {totalCount}
         </Typography>
       </CardContent>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: "#ABBBDF" }}>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-label-${value}`;
-
-        return (
-          <ListItem
-            key={value}
-            // secondaryAction={
-            //   <IconButton edge="end" aria-label="comments">
-            //     <CommentIcon />
-            //   </IconButton>
-            // }
-            disablePadding
-          >
-            <ListItemText role={undefined} onClick={handleToggle(value)} dense>
-              {/* <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  // checked={checked.indexOf(value) !== -1}
-                  // tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon> */}
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
-            </ListItemText>
-          </ListItem>
-        );
-      })}
-    </List>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: "#ABBBDF", marginLeft:5, marginLRight:5 }}>
+        {trashList.map((value) => {
+          const labelId = `checkbox-list-label-${value.id}`;
+          return (
+            value.count != 0 ?
+              <ListItem key={value} disablePadding>
+                <ListItemText role={undefined} onClick={handleToggle(value)} dense style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold"}}>
+                  <ListItemText id={labelId} primary={`${value.name}: ${value.count}`} />
+                </ListItemText>
+              </ListItem>
+            : <div></div>
+          );
+        })}
+      </List>
       <CardActions style={{fontFamily: "Poppins", color: "#35559B", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         {/**Download Certificate  */}
         <Button style={{textTransform: 'none', fontSize:18, fontWeight:600, color: "#35559B"}} onClick={handleClickOpen}>
@@ -241,10 +231,10 @@ export default function Congratulations(props) {
                 </Grid>
               </Grid>
             </DialogContentText>
-            <StyledTextField fullWidth label="Name"/>
+            <StyledTextField fullWidth label="Name" value={name} onChange={() => setName(name)} />
           </DialogContent>
           <DialogActions>
-            <Button component={Link} to="/certificate"  state={{beach:beach,trashList:trashList}} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}}>Continue</Button>
+            <Button component={Link} to="/certificate"  state={{beach:beach,trashList:trashList,name:name}} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}}>Continue</Button>
 
           </DialogActions>
         </Dialog>

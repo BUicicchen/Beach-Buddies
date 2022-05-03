@@ -11,7 +11,6 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import Beach from "./map/beach";
 import Congratulations from "./map/congrats";
-import TrashForm from "./trash/trashForm";
 import Certificate from './certificate/Certificate';
 
 ReactDOM.render(
