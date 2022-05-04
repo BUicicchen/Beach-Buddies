@@ -55,12 +55,12 @@ export default function Congratulations(props) {
       return updatedSum;
     }, 0);
     const [name, setName] = useState("");
+    const time = location.state.time;
     console.log("/congratulations")
     console.log(beach)
     console.log(trashList)
     console.log(totalCount)
-    const currTime = new Date()
-    console.log(currTime)
+    console.log(time)
     
     const [fadeProp, setFaceProp] = useState({
         fade : 'fade-out'
@@ -72,10 +72,10 @@ export default function Congratulations(props) {
 
         updateBeachData();
         async function updateBeachData(){
-            console.log(created)
+            // console.log(created)
             await firebase.firestore().collection("beaches_MA").doc(beach.doc_id).update({lastCleaned: created});
-            console.log(beach, currTime)
-            console.log(beach)
+            // console.log(beach, currTime)
+            // console.log(beach)
         }
        
         
@@ -190,14 +190,16 @@ export default function Congratulations(props) {
         <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: "bold", fontSize:25}} sx={{ mb: 2.5 }} color="text.secondary">
           Clean Up Statistics
         </Typography>
-        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold"}} sx={{ mb: 2.5 }} variant="body2">
-          Time
-        </Typography>
-        <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold"}} variant="body2">
-          Amount Cleaned: {totalCount}
-        </Typography>
+        <div style={{marginLeft:'10%'}}>
+          <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold", fontSize:18}} sx={{ mb: 2.5 }} variant="body2">
+            Time: {time.h} : {time.m} : {time.s + 1}
+          </Typography>
+          <Typography style={{fontFamily: "Poppins", color: "#FFF1CA", fontWeight: "bold", fontSize:18}} variant="body2">
+            Amount Cleaned: {totalCount}
+          </Typography>
+        </div>
       </CardContent>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: "#ABBBDF", marginLeft:5, marginLRight:5 }}>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: "#ABBBDF", marginLeft:'20%'}}>
         {trashList.map((value) => {
           const labelId = `checkbox-list-label-${value.id}`;
           return (
@@ -232,24 +234,38 @@ export default function Congratulations(props) {
                 </Grid>
               </Grid>
             </DialogContentText>
-            <StyledTextField fullWidth label="Name" value={name} onChange={() => setName(name)} />
+            <TextField fullWidth id="outlined-basic" label="Name" variant="outlined" inputProps={{style: {color: "#ffffff"}}}
+             sx={{
+              "& .MuiInputLabel-root": {color: 'white'},
+              "& .MuiOutlinedInput-root": {
+                "& > fieldset": { borderColor: "white" },
+              },
+              '& label.Mui-focused': {
+                color: 'white',
+              },
+              '& .MuiInput-underline:after': {
+                borderBottomColor: 'white',
+              },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: 'white',
+                },
+                '&:hover fieldset': {
+                  borderColor: 'white',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'white',
+                },
+              },
+            }} 
+            value={name} onChange={(e) => setName(e.target.value)} />
           </DialogContent>
           <DialogActions>
-            <Button component={Link} to="/certificate"  state={{beach:beach,trashList:trashList,name:name}} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}}>Continue</Button>
-
+            <Button component={Link} to="/certificate"  state={{beach:beach,trashList:trashList,timeVolunteered:time,name:name}} style={{color: '#FFF1CA', marginBottom:20, fontSize:25, textTransform:'none'}}>Continue</Button>
           </DialogActions>
         </Dialog>
       </CardActions>
     </Card>
-    {/* {trashList.map((item, index) => (
-                <Grid item xs={2} sm={4} md={4} key={item.id}>
-                    <h4>{item.name}</h4>
-                    <img src={item.img} style={{width:100}} />
-                    <div></div>
-                    <div style={{textAlign:'center', display:'inline-flex'}}>
-                    </div>
-                </Grid>
-            ))} */}
     </div>
     
     
