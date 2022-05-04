@@ -24,6 +24,7 @@ const Certificate = (props) => {
   const beach = location.state.beach;
   const trashList = location.state.trashList;
   const time = location.state.currTime;
+  const timeVolunteered = location.state.timeVolunteered;
   const name = location.state.name;
   const Day = new Date(time);
   console.log(Day);
@@ -101,12 +102,12 @@ const Certificate = (props) => {
 
             <div style={{ textAlign: "center" }}>
               <p >This Certificate is presented to </p>
-              <p>{name}</p>
+              <p style={{ fontWeight: "bold", fontSize:20 }}>{name}</p>
             </div>
 
             <div style={{ textAlign: "center", margin: "20px" }}>
               <p>
-                In recognition of them cleaning {beach.name} for TIME___ hours.
+                In recognition of them cleaning {beach.name} for {timeVolunteered.h} hours {timeVolunteered.m} minutes {timeVolunteered.s} seconds.
               </p>
               <p>
                 During their time with Beach Buddies, they have helped clean up
