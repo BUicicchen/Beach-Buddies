@@ -60,6 +60,7 @@ export default function Congratulations(props) {
     console.log(trashList)
     console.log(totalCount)
     const currTime = new Date()
+    console.log(currTime)
     
     const [fadeProp, setFaceProp] = useState({
         fade : 'fade-out'

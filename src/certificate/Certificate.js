@@ -13,11 +13,15 @@ const Certificate = (props) => {
   const location = useLocation();
   const beach = location.state.beach;
   const trashList = location.state.trashList;
-  const time = location.state.currTime;
   const name = location.state.name;
-  const Day = new Date(time);
-  console.log(Day);
-  console.log(beach, trashList, time);
+  const Day = new Date();
+  var month = Day.getUTCMonth() + 1; //months from 1-12
+  var day = Day.getUTCDate();
+  var year = Day.getUTCFullYear();
+
+  var newdate = month + "/" + day + "/" + year;
+  console.log(newdate)
+  console.log(beach, trashList, newdate);
 
   //define PDF conversion and download
   const inputRef = useRef();
@@ -131,7 +135,7 @@ const Certificate = (props) => {
               }}
             >
               <div>
-                <p>Date {time}</p>
+                <p>Date {newdate}</p>
               </div>
 
               <div style={{ display: "flex", justifyContent: "space-around" }}>
