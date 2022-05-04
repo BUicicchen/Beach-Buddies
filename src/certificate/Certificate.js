@@ -107,7 +107,7 @@ const Certificate = (props) => {
 
             <div style={{ textAlign: "center", margin: "20px" }}>
               <p>
-                In recognition of them cleaning {beach.name} for {timeVolunteered.h} hours {timeVolunteered.m} minutes {timeVolunteered.s} seconds.
+                In recognition of them cleaning <p style={{ fontWeight: "bold" }}>{beach.name}</p> for <p style={{ fontWeight: "bold" }}>{timeVolunteered.h} hours {timeVolunteered.m} minutes {timeVolunteered.s} seconds</p>.
               </p>
               <p>
                 During their time with Beach Buddies, they have helped clean up
