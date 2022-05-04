@@ -92,7 +92,7 @@ const Certificate = (props) => {
 
                 {/* middle of header*/}
                 <div style={{ justifyContent: "center", paddingTop:20, paddingLeft:20 }}>
-                  <p style={{ fontSize: "36px", fontWeight: "bold", color: "#35559B" }}>
+                  <p style={{ fontFamily: "Poppins", fontSize: "36px", fontWeight: "bold", color: "#35559B" }}>
                     Volunteer Certificate
                   </p>
                 </div>
@@ -100,7 +100,7 @@ const Certificate = (props) => {
                 {/* right side of header*/}
                 {window.innerWidth >= 400 ?
                   <div style={{ textAlign: "end", marginTop: "1px" }}>
-                    <p style={{ fontSize: "16px", fontWeight: "bold" }}>
+                    <p style={{ fontFamily: "Poppins", fontSize: "16px", fontWeight: "bold" }}>
                       Beach Buddies
                     </p>
                   </div>
@@ -109,15 +109,15 @@ const Certificate = (props) => {
               </div>
 
               <div style={{ textAlign: "center" }}>
-                <p style={{paddingBottom:10}}>This Certificate is presented to </p>
-                <p style={{ fontWeight: "bold", fontSize:20 }}>{name}</p>
+                <p style={{paddingBottom:10, fontFamily: "Poppins",}}>This Certificate is presented to </p>
+                <p style={{ fontWeight: "bold", fontSize:20, fontFamily: "Poppins" }}>{name}</p>
               </div>
 
               <div style={{ textAlign: "center", margin: "20px", display: 'inline'}}>
-                <p>
+                <p style={{fontFamily: "Poppins"}}>
                   In recognition of them cleaning <strong>{beach.name}</strong> for <strong>{timeVolunteered.h} hours {timeVolunteered.m} minutes {timeVolunteered.s} seconds</strong>.
                 </p>
-                <p style={{paddingTop:10}}>
+                <p style={{paddingTop:10, fontFamily: "Poppins"}}>
                   During their time with Beach Buddies, they have helped clean up
                   this much trash:
                 </p>
@@ -130,8 +130,8 @@ const Certificate = (props) => {
                   <Table sx={{}} size="small" aria-label="a dense table">
                     <TableHead>
                       <TableRow>
-                        <TableCell>Type of Trash</TableCell>
-                        <TableCell align="right">Amount</TableCell>
+                        <TableCell style={{fontFamily: "Poppins"}}>Type of Trash</TableCell>
+                        <TableCell align="right" style={{fontFamily: "Poppins"}}>Amount</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -140,10 +140,10 @@ const Certificate = (props) => {
                           key={value.name}
                           sx={{ border: 0 }}
                         >
-                          <TableCell component="th" scope="row">
+                          <TableCell component="th" scope="row" style={{fontFamily: "Poppins"}}>
                             {value.name}
                           </TableCell>
-                          <TableCell align="right">{value.count}</TableCell>
+                          <TableCell align="right" style={{fontFamily: "Poppins"}}>{value.count}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -160,10 +160,10 @@ const Certificate = (props) => {
                 }}
               >
                 <div>
-                  <p>Date: {newdate}</p>
+                  <p style={{fontFamily: "Poppins"}}>Date: {newdate}</p>
                 </div>
 
-                <div style={{ display: "flex", justifyContent: "space-around" }}>
+                <div style={{ display: "flex", justifyContent: "space-around", fontFamily: "Poppins" }}>
                   <p>Signature</p>
                   <img
                     src={NPOSignature}
