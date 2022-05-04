@@ -17,6 +17,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { red } from "@mui/material/colors";
 
 const Certificate = (props) => {
   //pass in variables
@@ -26,9 +27,14 @@ const Certificate = (props) => {
   const time = location.state.currTime;
   const timeVolunteered = location.state.timeVolunteered;
   const name = location.state.name;
-  const Day = new Date(time);
-  console.log(Day);
-  console.log(beach, trashList, time);
+  const Day = new Date();
+  var month = Day.getUTCMonth() + 1; //months from 1-12
+  var day = Day.getUTCDate();
+  var year = Day.getUTCFullYear();
+
+  var newdate = month + "/" + day + "/" + year;
+  console.log(newdate)
+  console.log(beach, trashList, newdate);
 
   //define PDF conversion and download
   const inputRef = useRef();
@@ -40,138 +46,141 @@ const Certificate = (props) => {
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
 
-      pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
+      pdf.addImage(imgData, "JPEG", 0, 20, pdfWidth, pdfHeight);
       pdf.save("download.pdf");
     });
   };
   return (
-    <div>
-      <div id="divToPrint" ref={inputRef}>
-        {/** certification */}
-        <div
-          style={{
-            border: " 1px solid #2E4E9A",
-            margin: "20px",
-            height: "auto",
-            width: "auto",
-            borderRadius: "10px",
-          }}
-        >
+    <div style={{backgroundColor:"#FFF1CA"}}>
+      <div style={{paddingTop:20,margin:0,backgroundColor:"#FFF1CA"}}>
+        <div ref={inputRef}>
+          {/** certification */}
           <div
             style={{
-              border: " 5px solid #2E4E9A",
-              margin: "2px",
+              border: " 1px solid #2E4E9A",
+              margin: "20px",
               height: "auto",
               width: "auto",
               borderRadius: "10px",
+              backgroundColor:"#ffffff"
             }}
           >
-            {/** header box */}
             <div
               style={{
-                margin: "20px",
-                display: "flex",
-                justifyContent: "space-around",
+                border: " 5px solid #2E4E9A",
+                margin: "2px",
+                height: "auto",
+                width: "auto",
+                borderRadius: "10px",
               }}
             >
-              {/* Left Side of header*/}
-              <div>
-                <img
-                  src={BeachBall}
-                  style={{ width: 100, transform: `rotate(${-20}deg)` }}
-                />
+              {/** header box */}
+              <div
+                style={{
+                  margin: "20px",
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
+              >
+                {/* Left Side of header*/}
+                <div>
+                  <img
+                    src={BeachBall}
+                    style={{ width: 100, transform: `rotate(${-20}deg)` }}
+                  />
+                </div>
+
+                {/* middle of header*/}
+                <div style={{ justifyContent: "center", paddingTop:20, paddingLeft:20 }}>
+                  <p style={{ fontSize: "36px", fontWeight: "bold", color: "#35559B" }}>
+                    Volunteer Certificate
+                  </p>
+                </div>
+
+                {/* right side of header*/}
+                {window.innerWidth >= 400 ?
+                  <div style={{ textAlign: "end", marginTop: "1px" }}>
+                    <p style={{ fontSize: "16px", fontWeight: "bold" }}>
+                      Beach Buddies
+                    </p>
+                  </div>
+                  : <div></div>
+                }
               </div>
 
-              {/* middle of header*/}
-              <div style={{ justifyContent: "center", paddingTop:20, paddingLeft:20 }}>
-                <p style={{ fontSize: "36px", fontWeight: "bold", color: "#35559B" }}>
-                  Volunteer Certificate
+              <div style={{ textAlign: "center" }}>
+                <p style={{paddingBottom:10}}>This Certificate is presented to </p>
+                <p style={{ fontWeight: "bold", fontSize:20 }}>{name}</p>
+              </div>
+
+              <div style={{ textAlign: "center", margin: "20px", display: 'inline'}}>
+                <p>
+                  In recognition of them cleaning <strong>{beach.name}</strong> for <strong>{timeVolunteered.h} hours {timeVolunteered.m} minutes {timeVolunteered.s} seconds</strong>.
+                </p>
+                <p style={{paddingTop:10}}>
+                  During their time with Beach Buddies, they have helped clean up
+                  this much trash:
                 </p>
               </div>
 
-              {/* right side of header*/}
-              {window.innerWidth >= 400 ?
-                <div style={{ textAlign: "end", marginTop: "1px" }}>
-                  <p style={{ fontSize: "16px", fontWeight: "bold" }}>
-                    Beach Buddies
-                  </p>
-                </div>
-                : <div></div>
-              }
-            </div>
+              {/* <Summary /> */}
 
-            <div style={{ textAlign: "center" }}>
-              <p >This Certificate is presented to </p>
-              <p style={{ fontWeight: "bold", fontSize:20 }}>{name}</p>
-            </div>
-
-            <div style={{ textAlign: "center", margin: "20px" }}>
-              <p>
-                In recognition of them cleaning <p style={{ fontWeight: "bold" }}>{beach.name}</p> for <p style={{ fontWeight: "bold" }}>{timeVolunteered.h} hours {timeVolunteered.m} minutes {timeVolunteered.s} seconds</p>.
-              </p>
-              <p>
-                During their time with Beach Buddies, they have helped clean up
-                this much trash:
-              </p>
-            </div>
-
-            {/* <Summary /> */}
-
-            <div style={{paddingLeft: window.innerWidth <= 760 ? 10 : 50,paddingRight: window.innerWidth <= 760 ? 10 : 50}}>
-              <TableContainer component={Paper}>
-                <Table sx={{}} size="small" aria-label="a dense table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Type of Trash</TableCell>
-                      <TableCell align="right">Amount</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {trashList.map((value) => (
-                      <TableRow
-                        key={value.name}
-                        sx={{ border: 0 }}
-                      >
-                        <TableCell component="th" scope="row">
-                          {value.name}
-                        </TableCell>
-                        <TableCell align="right">{value.count}</TableCell>
+              <div style={{paddingLeft: window.innerWidth <= 760 ? 10 : 50,paddingRight: window.innerWidth <= 760 ? 10 : 50}}>
+                <TableContainer component={Paper}>
+                  <Table sx={{}} size="small" aria-label="a dense table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Type of Trash</TableCell>
+                        <TableCell align="right">Amount</TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div>
-
-            {/** bottom date, signature */}
-            <div
-              style={{
-                margin: "20px",
-                display: "flex",
-                justifyContent: "space-around",
-              }}
-            >
-              <div>
-                <p>Date {time}</p>
+                    </TableHead>
+                    <TableBody>
+                      {trashList.map((value) => (
+                        <TableRow
+                          key={value.name}
+                          sx={{ border: 0 }}
+                        >
+                          <TableCell component="th" scope="row">
+                            {value.name}
+                          </TableCell>
+                          <TableCell align="right">{value.count}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </div>
 
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <p>Signature</p>
+              {/** bottom date, signature */}
+              <div
+                style={{
+                  margin: "20px",
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
+              >
+                <div>
+                  <p>Date: {newdate}</p>
+                </div>
+
+                <div style={{ display: "flex", justifyContent: "space-around" }}>
+                  <p>Signature</p>
+                  <img
+                    src={NPOSignature}
+                    alt="Italian Trulli"
+                    height="50px"
+                    width="50px"
+                  />
+                </div>
+              </div>
+
+              {/** bottom image */}
+              <div style={{ margin: "20px", textAlign: "right" }}>
                 <img
-                  src={NPOSignature}
-                  alt="Italian Trulli"
-                  height="50px"
-                  width="50px"
+                  src={BBlogo}
+                  style={{ height: "89px", width: "136px", opacity: "0.7" }}
                 />
               </div>
-            </div>
-
-            {/** bottom image */}
-            <div style={{ margin: "20px", textAlign: "right" }}>
-              <img
-                src={BBlogo}
-                style={{ height: "89px", width: "136px", opacity: "0.7" }}
-              />
             </div>
           </div>
         </div>
