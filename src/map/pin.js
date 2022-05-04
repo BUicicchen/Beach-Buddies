@@ -7,6 +7,7 @@ C9.8,8.4,9.4,7.9,9.4,7.4z M14.5,13.8c-0.8-0.3-2.3-1.2-3.1-2.8c-0.5-0.9-0.7-1.7-0
 c0.6-0.2,1.6-0.3,2.7-0.1c1.2,0.3,2.1,0.9,2.7,1.3c0,0.2,0,0.4,0,0.6C17.4,11.1,16.2,12.9,14.5,13.8z`;;
 
 function Pin({ size , color, onClick }) {
+
     return (React.createElement("svg", { height: size, viewBox: "0 0 24 24", style: {cursor: 'pointer', stroke: 'none', fill : color}, onClick: onClick },
         React.createElement("path", { d: ICON })));
 }

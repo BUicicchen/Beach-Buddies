@@ -8,7 +8,9 @@ import Map, {
   ScaleControl,
   GeolocateControl
 } from 'react-map-gl';
-import Pin from './pin.js';
+import pinGreen from '../public/assets/location-green.png';
+import pinYellow from '../public/assets/location-yellow.png';
+import pinRed from '../public/assets/location-red.png';
 import firebase from '../firebase/firebase';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -153,13 +155,13 @@ export default function MapComponent() {
             color='#3FB1CE'
         >
             {beach.lastCleaned.seconds > weekAgo &&
-              <Pin size='60' color='green' onClick={() => setBeachPopup(beach)} />
+              <img src={pinGreen} style={{width:25}} onClick={() => setBeachPopup(beach)} />
             }
             {(beach.lastCleaned.seconds <= weekAgo && beach.lastCleaned.seconds > monthAgo) &&
-              <Pin size='60' color='yellow' onClick={() => setBeachPopup(beach)} />
+              <img src={pinYellow} style={{width:25}} onClick={() => setBeachPopup(beach)} />
             }
             {beach.lastCleaned.seconds <= monthAgo &&
-              <Pin size='60' color='red' onClick={() => setBeachPopup(beach)} />
+              <img src={pinRed} style={{width:25}} onClick={() => setBeachPopup(beach)} />
             }
         </Marker>
     )), [beaches]
@@ -359,7 +361,7 @@ export default function MapComponent() {
                       <p style={{color:"#355598", marginBottom:10, fontSize:20}}>You're not on {beachPopup.name}, wya?</p>
                     </div>
                     <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                      <img style={{width:200, marginBottom:30}} src={require('../public/assets/warning-animation.gif')} />
+                      <img style={{width:200, marginBottom:30}} src={require('../public/assets/warning-animation-UPDATED.gif')} />
                     </div>
                     <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                       <Button style={{color:"#355598", textTransform:'none', fontSize:20}} onClick={handleClose}>I'm heading to the beach!</Button>

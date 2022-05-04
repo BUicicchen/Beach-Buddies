@@ -89,7 +89,7 @@ function BtnComponent(props) {
               <p style={{color:"#355598", marginBottom:10, fontSize:20}}>You're no longer on {props.beachInfo.name}, wya?</p>
             </div>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-              <img style={{width:200, marginBottom:30}} src={require('../public/assets/warning-animation.gif')} />
+              <img style={{width:200, marginBottom:30}} src={require('../public/assets/warning-animation-UPDATED.gif')} />
             </div>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
               <Button style={{color:"#355598", textTransform:'none', fontSize:20}} onClick={handleClose}>I'm headed back</Button>
