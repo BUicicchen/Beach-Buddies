@@ -124,7 +124,7 @@ export default function MapComponent() {
   useEffect(() => {
 		const getBeaches = async () => {
       setLoading(true);
-      const beachesRef = await firebase.firestore().collection("beaches_MA");
+      const beachesRef = await firebase.firestore().collection("beaches_MA_demo_updates");
       await beachesRef.onSnapshot((querySnapshot) => {
         const items = [];
         querySnapshot.forEach((doc) => {

@@ -73,7 +73,7 @@ export default function Congratulations(props) {
         updateBeachData();
         async function updateBeachData(){
             // console.log(created)
-            await firebase.firestore().collection("beaches_MA").doc(beach.doc_id).update({lastCleaned: created});
+            await firebase.firestore().collection("beaches_MA_demo_updates").doc(beach.doc_id).update({lastCleaned: created});
             // console.log(beach, currTime)
             // console.log(beach)
         }
