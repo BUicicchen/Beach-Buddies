@@ -4,12 +4,12 @@ Our project is a web, iOS, and Android app that provides opportunities for volun
 
 Check out our site! [Beach Buddies](https://freelance-beach-cleanup.web.app/)
 
-![1](./public/productDocumentation/1.PNG)
-![7](./public/productDocumentation/7.PNG)
-![9](./public/productDocumentation/9.PNG)
-![12](./public/productDocumentation/12.PNG)
-![13](./public/productDocumentation/13.PNG)
-![16](./public/productDocumentation/16.PNG)
+<img src="./public/productDocumentation/1.PNG" alt="drawing" height="200"/>
+<img src="./public/productDocumentation/7.PNG" alt="drawing" height="200"/>
+<img src="./public/productDocumentation/9.PNG" alt="drawing" height="200"/>
+<img src="./public/productDocumentation/12.PNG" alt="drawing" height="200"/>
+<img src="./public/productDocumentation/13.PNG" alt="drawing" height="200"/>
+<img src="./public/productDocumentation/16.PNG" alt="drawing" height="200"/>
 
 
 # Running the code:
