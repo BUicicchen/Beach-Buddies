@@ -1,6 +1,8 @@
 # [Beach Buddies](https://freelance-beach-cleanup.web.app/) 🏖️
 
-Our project is a web, iOS, and Android app that provides opportunities for volunteers to protect the beach, ocean, and environment, as well as allowing individuals to gain service hours automatically!
+Our project is a web, iOS, and Android app that aims to:  
+1. provide opportunities for volunteers to protect the beach, ocean, and the environment!
+2. allow individuals to gain service hours automatically!
 
 <p float="left">
 <img src="./public/productDocumentation/1.PNG" alt="drawing" height="400" padding-right="10px"/>
@@ -10,6 +12,10 @@ Our project is a web, iOS, and Android app that provides opportunities for volun
 <img src="./public/productDocumentation/13.PNG" alt="drawing" height="400" paddingRight="10px"/>
 <img src="./public/productDocumentation/16.PNG" alt="drawing" height="400" paddingRight="10px"/>
 </p>
+
+https://user-images.githubusercontent.com/43624907/167057279-cdc3512c-2f6c-4013-9d64-5323d0683b58.mp4
+
+
 
 ## Running the code:
 
