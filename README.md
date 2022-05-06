@@ -10,12 +10,12 @@ https://user-images.githubusercontent.com/43624907/167057570-9707802a-c6c9-4070-
   
   
 <p float="left">
-<img src="./public/productDocumentation/1.PNG" alt="drawing" height="400" padding-right="10px"/>
-<img src="./public/productDocumentation/7.PNG" alt="drawing" height="400" paddingRight="10px"/>
-<img src="./public/productDocumentation/9.PNG" alt="drawing" height="400" paddingRight="10px"/>
-<img src="./public/productDocumentation/12.PNG" alt="drawing" height="400" paddingRight="10px"/>
-<img src="./public/productDocumentation/13.PNG" alt="drawing" height="400" paddingRight="10px"/>
-<img src="./public/productDocumentation/16.PNG" alt="drawing" height="400" paddingRight="10px"/>
+<img src="./public/productDocumentation/1.PNG" alt="drawing" height="500" padding-right="10px"/>
+<img src="./public/productDocumentation/7.PNG" alt="drawing" height="500" paddingRight="10px"/>
+<img src="./public/productDocumentation/9.PNG" alt="drawing" height="500" paddingRight="10px"/>
+<img src="./public/productDocumentation/12.PNG" alt="drawing" height="500" paddingRight="10px"/>
+<img src="./public/productDocumentation/13.PNG" alt="drawing" height="500" paddingRight="10px"/>
+<img src="./public/productDocumentation/16.PNG" alt="drawing" height="500" paddingRight="10px"/>
 </p>
 
 
